@@ -1,0 +1,179 @@
+Table of Contents:
+TOC \h \u \z \n \t &quot;Heading 1,1,Heading 2,2,Heading 4,4,Heading 5,5,Heading 6,6,&quot;ISO 1: Frame
+ISO 1 vs. ISO 2: Brick Veneer or other coverings
+Brick Veneer
+Identifying Brick Veneer
+Identifying True Brick
+Best practices if cladding if present
+Case Study 1 - Brick Veneer over wood frame - ISO I Frame building
+Case Study 2 - Brick Veneer over block - ISO II joisted masonry building
+Case Study 3 - Stucco over wood frame - ISO I Frame building
+Case study 4 - Vinyl over true brick - ISO II Joisted Masonry Building
+Case study 5 - Brick veneer and vinyl over masonry
+Common mistakes in identifying cladding
+Taking a conservative approach
+ISO I : Pedestal or podium Construction
+ISO 2: Joisted Masonry
+Wood as the weakest link
+ISO 3: Non-Combustible
+ISO 3 buildings with a high combustible load
+ISO 4: Masonry Non-Combustible
+ISO 5: Modified Fire Resistive
+ISO 6: Fire Resistive
+ISO 1: Frame
+Combustible walls and a combustible roof
+Wood frame walls, floors, and roof
+Generally habitational, with 1-4 stories
+A frame building has all combustible materials—wood walls, wood roof, wood floors. It’s basically a standard house. You can have frame buildings of different sizes, but they are typically used for homes or small apartment and mixed use buildings. Identifying a frame building can be very easy as long as there is no brick veneer, stucco, or other cladding being used to disguise the structure.
+ISO I - Fig. 1 - Typical Frame Home
+ISO I - Fig. 2 - Typical Frame Apartment Building
+ISO I - Fig. 3 - Typical Frame Apartment Buildings
+A mixture of cladding types, in particular when the cladding is brick veneer mixed with vinyl type siding can also be an indicator of frame construction. This is not always true, but it’s a good rule of thumb.
+ISO I - Fig. 4 - Frame buildings with some sections of Brick Veneer
+ISO 1 vs. ISO 2: Brick Veneer or other coverings
+In some cases, frame buildings have veneers or other exterior coverings applied that make it difficult to identify that they are frame buildings. The most common coverings are brick veneer, stucco, and decorative panels.
+If there is a covering, it is important to determine whether the underlying building is ISO I Frame or ISO-2 Joisted Masonry.
+Brick Veneer
+Brick veneer is a thin layer of brick applied over a frame or masonry structure, primarily for appearance.
+If the wall is frame with brick veneer, the window or door depth will be shallow because the brick is only covering wood framing. A masonry wall will have much deeper openings because the wall itself is thicker. If brick is present and appears to be veneer, confirm construction type through depth measurements, walking around the building to look for exposed areas, or reviewing building records.
+Identifying Brick Veneer
+Brick veneer usually has only “stretcher” bricks, where the long face is visible, and lacks “header” bricks, where the short end is visible, that are typical in true brick construction. Brick veneer may also include visible weep holes, small openings at the base of the wall to allow moisture to escape.
+ISO 1 vs. 2 - Fig. 1 - Typical brick veneer pattern with all “stretcher” bricks.
+ISO 1 vs. 2 - Fig. 2 - Typical brick veneer pattern with “weep holes”
+Identifying True Brick
+True brick walls will almost always have a mix of “stretcher” bricks and  “header” bricks, where the short end is visible.  Header bricks do not always appear in rows. They may appear in other patterns as well. In general if there are header bricks in a regular pattern, the brick can be assumed to be true brick.
+ISO 1 vs. 2 - Fig. 3 - Typical true brick pattern with rows of “header” bricks
+ISO 1 vs. 2 - Fig. 4 - Typical true brick pattern with rows of “header” bricks
+ISO 1 vs. 2 - Fig. 5 - Typical true brick pattern with rows of “header” bricks
+ISO 1 vs. 2 - Fig. 6 - Alternating header brick pattern - indicates true brick
+Best practices if cladding if present
+If cladding is present, it’s important to identify the type of structure behind it so that the ISO class can be correctly determined. The best practice is to take a photo of a tape measurement of the depth of a door or upper story window in an exterior wall. A typical masonry block is 8 inches deep, and a typical brick wall is about 7.25 inches deep. This does not count the thickness of siding or interior finishes. A good rule of thumb is that  walls with a thickness of less than 8 inches not counting the cladding are ISO I frame.
+The effectiveness of measurement is illustrated in the following case studies.
+Case Study 1 - Brick Veneer over wood frame - ISO I Frame building
+This building is habitational, with 2 floors and brick veneer on the exterior. Is the structure behind the veneer frame or masonry? The wall depth is about 5.5 inches behind the brick veneer, making this an ISO I frame building.
+ISO 1 vs. 2 - Fig. 7 - Apartment building exterior with brick veneer
+ISO 1 vs. 2 - Fig. 8 - 5.5 inch depth behind brick veneer at window
+Case Study 2 - Brick Veneer over block - ISO II joisted masonry building
+This building is habitational, with 3 floors and brick veneer on the exterior. Is the structure behind the veneer frame or masonry? The wall depth is about 10 inches behind the brick veneer, making this an ISO II joisted masonry building.
+ISO 1 vs. 2 - Fig. 9 - Apartment building exterior with brick veneer
+ISO 1 vs. 2 - Fig. 10 - 10 inch depth and block behind brick veneer at window
+Case Study 3 - Stucco over wood frame - ISO I Frame building
+This building is habitational, with 3 floors and stucco on the exterior. Is the structure behind the stucco frame or masonry? The wall depth is less than 7  inches even including the stucco. That makes this an ISO I Frame building.
+ISO 1 vs. 2 - Fig. 11 - Apartment building with stucco cladding
+ISO 1 vs. 2 - Fig. 12 - Wall depth is less than 7 inches, including stucco
+Case study 4 - Vinyl over true brick - ISO II Joisted Masonry Building
+This is a 5 story building with a mixture of vinyl siding and true brick. The true brick at the front can be identified by the header bricks. They are not in regular rows, but in a decorative pattern. This is still a good indicator of true brick.
+Damage to the siding confirmed that this was an ISO II building.
+ISO 1 vs. 2 - Fig. 13 - Mixed cladding with decorative true brick pattern
+ISO 1 vs. 2 - Fig. 14 - Damaged area shows brick beneath vinyl siding.
+Case study 5 - Brick veneer and vinyl over masonry
+This is a 1 story building occupied by offices. It has a mixture of brick veneer and vinyl siding.  Are the walls behind the veneer masonry or frame? The building appears to be ISO I Frame but this is deceiving. Depth measurements showed a wall depth of about 12 inches not including the veneer (assumed to be about 3 inches deep). That wall depth indicates that this building is ISO II Joisted Masonry.
+ISO 1 vs. 2 - Fig. 15 - Mixture of brick veneer and vinyl siding.
+ISO 1 vs. 2 - Fig. 16 - Wall depth of 15 inches total at the exterior door.
+Common mistakes in identifying cladding
+Not measuring the full wall depth
+Measuring the depth of only the brick veneer, as shown in the photo below, cannot be used to identify ISO class. A measurement of this kind only establishes that there is veneer present, but not what’s behind it. A full wall depth photo as shown in the case studies above, is what’s needed.
+ISO 1 vs. 2 - Fig. 17 - Measuring only the brick veneer, not the full wall depth.
+Not viewing the building rear
+The building below is vacant and shows clear brick veneer patterns. No access was provided to the interior, but the inspector was able to view the rear of the building. The rear of the building showed that the walls behind the veneer were block construction. It’s not uncommon for veneer to be used only on forward facing parts of buildings, leaving the true wall construction visible at the rear.
+ISO 1 vs. 2 - Fig. 18 - Brick veneer exterior at building front
+ISO 1 vs. 2 - Fig. 19 - Building rear shows block construction
+Not identifying true header bricks
+Where brick veneer meets a different type of cladding, the bricks in the veneer may appear to be header bricks. This is typically done to avoid breaking the pattern in the veneer, and is not in itself evidence of true brick. For this to be true brick, there should be headers elsewhere on the structure.
+ISO 1 vs. 2 - Fig. 20 - Frame building with veneer showing false “headers”
+Taking a conservative approach
+In many cases, it’s very difficult to tell with 100% certainty how a building is constructed. In these cases it’s generally best to rate the building lower rather than higher. Underwriters appreciate this, because it protects them from being underinsured.
+For example, if a building has masonry walls, but it’s unknown if the internal structure is wood (ISO II) or steel (ISO IV), it’s best to rate the building as ISO II and assume that the internal structures are more combustible rather than less.. If there is no evidence for steel, it should not be assumed that steel is present.
+In general, the rating of the building construction should reflect the lowest rate that can be justified by the inspector's observations during the inspection.
+ISO I : Pedestal or podium Construction
+It’s increasingly common, especially for new apartment buildings, new condo buildings, or even new mixed-use buildings, to use pedestal construction. This is a form of construction where the first floor or first two floors are made of concrete (ISO 5 or 6), and the upper floors are made of wood (ISO I - Frame)
+Typically, the concrete  floors are used for commercial space or for parking areas, and the upper wooden floors are habitational.
+When visiting a building like this, the construction of the bottom floor will look like an all-concrete building, and it can be very easy to misclassify it. There is typically a stucco or decorative covering on the frame floors as well, to disguise the fact that they are frame.
+Google Earth or Google Maps can be helpful; if historical imagery is available, it will often clearly show that several of the upper stories are framed. Insurance companies generally want these buildings rated either as entirely frame or with a clear breakdown of which sections are frame and which are not.
+If  pedestal construction is suspected, measuring the window depth on the upper floors—preferably the highest floor you can reach—is a good way to determine how those floors are built. If that is not possible because the windows do not open, asking the building manager, obtaining building blueprints, or reviewing historical imagery are the best ways to confirm.
+The below is an apartment building with concrete parking areas on the first floor. The upper floors are stucco covered and the construction is difficult to determine. This building was ultimately determined to be wood frame with a concrete first floor. It is not concrete throughout despite the appearance of the parking areas.
+ISO 1 Pedestal - Fig. 1 - Upper floors with stucco covering
+ISO 1 Pedestal - Fig. 2 - First floor concrete parking areas
+Below is another example, this time of a building under construction. When complete, the upper frame levels will likely be covered with decorative panels for a more modern look. The majority of the building is still frame, regardless of the final cladding used.
+ISO 1 Pedestal - Fig. 3 - Pedestal building under construction
+ISO 2: Joisted Masonry
+Masonry walls and a combustible structure
+Masonry walls,
+Wood internal structure and roof structure
+Very common construction type
+Can be habitational, commercial or mixed use
+Typically 1-8 stories in height.
+Brick veneer and other cladding types are common
+Joisted masonry construction is construction where the exterior walls of the building are masonry—whether concrete block, brick, or stone—and the interior structural parts of the building are wood.
+The masonry on the exterior may be covered with other materials, such as stucco or brick veneer. Brick veneer is often applied over concrete block to give the building a higher-end appearance, but it can also be found over true brick masonry walls. If cladding is present, wall depth measurements or other contextual information should be used to determine construction type.
+Any building that has masonry walls and wood structural members is ISO-2. If the building has concrete on a couple of the floors but a wood roof assembly, it should still be rated as ISO-2, unless it is possible to break down the building into mixed construction.
+Smaller older buildings with masonry walls tend to be ISO II unless they have had major structural updates to make them ISO IV.
+ISO II - Fig. 1 - True brick exterior
+ISO II - Fig. 2 - Wood supports visible in basement
+If the walls are masonry, and the internal structure of the building can’t be observed, the best practice is to assume the structure is wood, making the default rating ISO II. For example, in the below image, there is true brick visible inside the building, so there are masonry walls. If the interior structure of the building cannot be confirmed to be all steel or concrete, it should be assumed to be wood, making the building rating ISO II.
+ISO II - Fig. 3 - Masonry walls - default to ISO II without additional info
+Wood as the weakest link
+Because buildings are updated over time, there can be many combinations of building components. If large areas of these components are wood, the building will have a larger amount of combustible material and should typically be rated as ISO II.
+Take the two images below for example. There are steel roof supports, but the roof decking is wood. Despite the steel, the underwriter would typically want this rated as ISO II.
+ISO II - Fig. 3 - Steel supports with wood roof decking - ISO II
+ISO II - Fig. 4 - Steel supports with wood roof decking - wood makes it ISO II
+ISO 3: Non-Combustible
+Steel frame structure without true masonry walls
+Typically used for warehouses or industrial buildings
+Typically prefabricated construction
+Metal siding is very common but cladding can be used as well
+Minimal use of wood in the building
+Masonry may be present but not load bearing
+Usually 1 floor or 1 floor with a mezzanine
+ISO III buildings are typical steel frame walls with masonry in-fill, brick veneer, metal sheathing or EIFS exteriors
+The steel framing is the load bearing portion of the building. AMBS (all metal building system) pre-engineered construction is common.
+ISO III - Non-combustible construction is all-steel construction where the walls are not masonry and there is no significant use of wood in the building. These are usually prefab structures, warehouses, storage buildings, or some industrial buildings. This type of construction lends itself well to wide open spaces, which are ideal for commercial use. Some newer churches are built this way to take advantage of the wide spaces the metal construction allows.
+Multi-floor ISO II is not common but if multi-story, floors are commonly concrete on steel frame on steel deck. The building is still ISO III as long as the structural elements are steel and there are no masonry walls.
+ISO III - Fig. 1 - Industrial use with metal siding - typical for ISO III
+ISO III - Fig. 2 - Open interior space with steel supports clearly visible
+ISO III - Fig. 3 - Steel column with metal siding viewed from interior
+ISO III - Fig. 4 - Light metal construction with no masonry walls - ISO III
+ISO 3 buildings with a high combustible load
+If you have a non-combustible building with steel structural supports and the interior has been finished with wood—such as significant amounts of wood paneling or other combustible materials—the building should be rated as a frame building. This is because, if a fire were to begin, the combustible materials inside would burn, weakening the unprotected steel structure. Under the right conditions, this can cause the building to collapse.
+ISO 3 buildings that are not intended for industrial use can be built this way. For example, there might be an ISO 3 church building that is finished inside entirely in wood paneling and other combustible materials. This makes the building significantly more prone to fire, and is a big concern for underwriters.
+ISO 4: Masonry Non-Combustible
+Masonry Walls and Steel Structure
+Masonry Walls
+Steel Frame Supports
+Steel components do not have fire protective spray on insulation
+Floors and roofs commonly concrete on steel deck
+Typically used for shopping centers, strip centers, office buildings, warehouses, schools
+Masonry non-combustible (ISO 4) construction is a building that has masonry walls—brick, concrete, or stone—and interior supports that are all steel or metal. This type of construction is typical of commercial buildings and can also be seen in some restaurants and other facilities.
+If possible, document the roof truss system, which in many ISO 4 buildings is visible. This exposed structure often gives the building an industrial look. A clear photo of it can confirm that the building is ISO 4.
+The difference between an ISO 4 building and an ISO 3 building is that the walls of an ISO 4 building are masonry.
+The difference between ISO 4 and ISO 2 is that there is no wood in an ISO 4 building. A building that appears to be ISO 4, but has wood in the roof assembly would be rated as ISO 2.
+ISO 4 buildings tend to have unprotected, relatively thin steel supports, and if these supports are visible, they can be very easy to identify. If you are unable to confirm the type of supports and you know that the walls are masonry, the best practice is to rate the building as ISO 2 rather than assume that all of the supports are steel without visual verification.
+ISO IV - Fig. 1 - Typical ISO IV building exterior - block walls clearly visible
+ISO IV - Fig. 2 - Unprotected steel roof system and masonry walls
+ISO IV - Fig. 3 - Typical steel roof/ floor supports for ISO IV
+ISO IV - Fig. 4 - Typical ISO IV industrial building
+ISO 5: Modified Fire Resistive
+Masonry Walls and Protected Steel/ All Concrete Structure
+Protected steel and/or concrete or heavy masonry walls and floors
+Overall construction of fire resistive materials - no wood
+Typical for very large/ high-rise or some large industrial buildings
+ISO 5 buildings have all masonry walls and heavy steel or concrete walls, floors, and roofs. These are fireproof buildings in which all structural materials have a fire resistance rating of more than one hour but less than two hours. Look for concrete construction or steel with fiberglass-based fireproof foam applied.
+The difference between an ISO 4 building and an ISO 5 building, if steel supports are involved, is typically the use of that fireproof foam, which increases the fire resistance of the steel members. This is a good visual indicator.  If you see steel with fireproof foam, it is generally an ISO 5 building.
+The difference between an ISO 5 building and an ISO 6 building comes down to the fire resistance of the materials, with ISO 5 using thinner concrete or less fire-resistant materials than ISO 6, but both still being relatively heavy construction. If it is concrete construction but not extremely heavy concrete, it could be rated as ISO 5.
+As a general rule, if it is concrete with some steel members that have fireproof foam, think of it as ISO 5. If it is all heavy concrete construction with thick concrete, think of it as ISO 6. If it is thick concrete but has a wood roof assembly, it should default to ISO 2 or mixed construction because the roof is combustible.
+ISO V - Fig. 1 - Typical high rise construction - likely ISO V or VI
+ISO V - Fig. 2 - Typical high rise construction - likely ISO V or VI
+ISO V - Fig. 3 - Fire proof fiberglass foam applied to steel supports
+ISO V - Fig. 4 - Fire proof fiberglass foam applied to steel supports
+ISO V - Fig. 5 - Fire proof fiberglass foam applies to steel supports
+ISO 6: Fire Resistive
+Masonry Walls and All Concrete Structure
+Heavy masonry walls and floors
+Overall construction of fire resistive materials - no wood
+Typical for high-rise office buildings, parking garages, and other large structures
+ISO 6 is reinforced concrete construction, with the building frame and floors having a fire rating not less than 2 hours. This typically requires walls of masonry materials minimum of 4 in thick, hollow masonry minimum 8 in thick, floors and roofs minimum of 4 in thick reinforced concrete, and any structural steel load bearing components with minimum of 2 hour fire rating,
+ISO 6 construction is reinforced concrete construction with a fire resistance of two hours or more. Look for masonry walls, concrete walls, concrete floors, and concrete roof assemblies. This is true reinforced concrete construction.
+ISO VI - Fig. 1 - Typical High Rise Building
+ISO VI - Fig. 2 - Heavy concrete construction
+ISO VI - Fig. 3 - Heavy concrete construction
+ISO VI - Fig. 4 - Heavy concrete construction

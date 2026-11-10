@@ -1,0 +1,18 @@
+# Chrome Web Store signing key and packed builds: never commit
+*.pem
+*.crx
+*.zip
+
+# Local settings and dependencies
+.env
+.env.*
+node_modules/
+*.log
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
