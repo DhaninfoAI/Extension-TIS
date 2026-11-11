@@ -35,6 +35,10 @@ plan, and their licence gets that plan's photos and seats. One licence per custo
   has 49 new photos for the AI to review, but only 2 of your plan's 5,000 photos are left this month. The allowance
   resets on Dec 1. Ask your administrator for more photos. Orders already reviewed can still be re-run." Raise the
   customer's photos (Edit) or move them to a bigger plan and they can continue at once.
+- **Reset photos used (2026-11-11, admins)**: dashboard → Customers & licences → Edit → "Reset photos used to 0"
+  (click twice) or `PATCH /v1/admin/orgs/{id} {resetPhotoCount:true}`. Sets `licence.usageResetAt`; only photos first
+  reviewed after it count this month (shown as "counted since …"). Photos reviewed before stay free when re-run; a new
+  month starts from 0 anyway.
 - **The reviewer is told before Run (2026-11-11)**: once an order is ready, the panel asks
   `GET /v1/orders/{id}/photo-allowance` (`{limited, cap, used, left, need, enough, resetsOn, message}`; admins and
   practice mode: `{limited:false}`) and, if it doesn't fit, shows a red **"Not enough photos left this month"** notice

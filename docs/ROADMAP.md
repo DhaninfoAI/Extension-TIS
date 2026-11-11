@@ -3,6 +3,12 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-11): reset a customer's photos used this month
+
+- Admins: Customers & licences → Edit → **Reset photos used to 0** (click twice). The month's count starts again from
+  that moment (`licence.usageResetAt`, kept across licence edits); the Edit form shows "counted since …". Tests:
+  `backend/test/org-brand.mjs`.
+
 ## Built (2026-11-11): photo allowance shown before Run
 
 - The plan's photos per month were enforced only when Run was pressed, and a refusal showed as one small line in the
