@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SmartFill",
-  "version": "0.4.1",
+  "version": "1.0.0",
   "description": "AI-assisted quality control review for inspection reports.",
   "permissions": [
     "sidePanel",

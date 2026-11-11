@@ -3,6 +3,13 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-11): version 1.0.0, Web Store package
+
+- Extension version **1.0.0** for the first Chrome Web Store release. `tools/pack.ps1` builds
+  `SmartFill-<version>.zip` on the Desktop: manifest at the root, forward-slash paths, only the files the extension
+  uses (no docs/notes/tools), without the `localhost:4010` permission. Unused TIS logo files removed from the extension
+  (the backend keeps its own copy for the TIS organisation's logo).
+
 ## Built (2026-11-11): photo shapes in words, dashboard link in Settings
 
 - The "photo may not be from the site" card said "(1.11:1 vs 1.33:1)". It now says it in words: "(this one is almost

@@ -1,6 +1,6 @@
 # SmartFill (Chrome extension)
 
-AI-assisted QC for Technical Insurance Services reports on EZSurveyForm. **v0.4.0** (2026-11-05).
+AI-assisted QC for Technical Insurance Services reports on EZSurveyForm. **v1.0.0** (2026-11-11, first Chrome Web Store release).
 Reads an EZ order (forms, recommendations, photos), sends it to the backend (`../backend`), and shows the review
 in a TIS-branded side panel. Every suggestion can be **applied into the EZ form**, undone, or dismissed with a
 reason. Nothing is saved in EZ until the reviewer clicks EZ's own Save. Project guide: `../CLAUDE.md`.
@@ -13,6 +13,17 @@ reason. Nothing is saved in EZ until the reviewer clicks EZ's own Save. Project 
 3. Open the panel (toolbar icon) and **sign in** with your SmartFill account (create one: `cd backend && npm run
    create-user -- --email you@company.com --role admin`). Then open an order in EZ (it is read in the background as soon as it opens) → **Run AI review** (always
    reads the order again and runs a new review). Licences, roles and the dashboard: `docs/LICENSING.md`.
+
+The extension talks to the hosted backend (`https://dashboard.boost-usa.com/tis`, `common/config.js`); to test
+against a backend on this PC, change `apiBase` there to `http://localhost:4010` (the manifest allows it).
+
+## Publish to the Chrome Web Store
+
+1. Raise `"version"` in `manifest.json` (every upload needs a higher one; 1.0.0 was the first).
+2. Build the upload zip (goes to the Desktop as `SmartFill-<version>.zip`):
+   `powershell -ExecutionPolicy Bypass -File tools\pack.ps1`
+   It keeps manifest.json at the root, leaves out docs/notes/tools, and drops the `localhost:4010` permission.
+3. Upload it in the Chrome Web Store developer dashboard (new item, or Package → Upload new package).
 
 Preview without Chrome: http://localhost:4010/ext/sidepanel/sidepanel.html?harness=1&order=1166305
 (`&page=none` = not on EZ, `&present=1` = pretend fields are on the page to try Apply).
