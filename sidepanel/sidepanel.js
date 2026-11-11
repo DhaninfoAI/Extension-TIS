@@ -142,6 +142,11 @@ async function init() {
   const setSettings = open => { $('settings').hidden = !open; $('btnSettings').setAttribute('aria-expanded', String(open)); };
   $('btnSettings').onclick = e => { e.stopPropagation(); setSettings($('settings').hidden); };
   $('btnSetClose').onclick = () => setSettings(false);
+  // the dashboard lives on the same server as the API: <apiBase>/dashboard (e.g. …/tis/dashboard)
+  $('btnDashboard').onclick = async () => {
+    const c = await send({ type: 'GET_CONFIG' }).catch(() => null);
+    if (c?.apiBase) chrome.tabs.create({ url: c.apiBase.replace(/\/+$/, '') + '/dashboard' });
+  };
   document.addEventListener('click', e => { if (!$('settings').hidden && !e.target.closest('#settings, #btnSettings')) setSettings(false); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('settings').hidden) setSettings(false); });
   $('btnRun').onclick = () => run();

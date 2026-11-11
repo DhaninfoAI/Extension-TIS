@@ -207,6 +207,8 @@ Plus a separate **web admin** for TIS managers (rules, hazard library, analytics
   messages for wrong password, locked account, all seats in use, licence expired); Settings shows the person,
   organisation, licence (plan · valid until · photos used of the plan's photos this month) and Sign out. A session that ends (expired licence,
   disabled user, signed out elsewhere) brings the sign-in card back.
+- **Settings → Dashboard** (2026-11-11): "Open the SmartFill dashboard" opens `<apiBase>/dashboard` in a new tab,
+  with a line on what it shows (seats, computers signed in, photos this month, reviews).
 - **Branding** (2026-11-11): header = Boost star + "SmartFill" when signed out (and when the organisation has no
   logo); after sign-in the customer's logo (light/dark) + "SmartFill". The footer keeps the Boost logo. If the
   organisation's platform is not supported by this version: a "SmartFill can't open here yet" card instead of the
