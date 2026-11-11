@@ -3,6 +3,19 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-11): AI rules tab in the dashboard (replaces the /rules page)
+
+- Admins get an **AI rules** tab in the dashboard (`/dashboard#rules`; the old `/rules` address forwards there). No
+  code and no JSON:
+  - **Notes for the AI**: pick "All clients", one client or one form (only names from the list, so a note can't be
+    saved under a name the AI never sees), write plain-English instructions, add why; last change and versions kept.
+  - **Automatic checks** read as sentences ("If “Brick veneer” is “Yes”, then “Veneer backing” must not be “N/A” or
+    blank."), shown as Must fix / To check / Advisory, "Built in" vs "Yours". Add or edit one with dropdowns (question,
+    answer, must be / must not be, values, how it shows, what the reviewer reads), **Try on saved orders**, Remove
+    (click twice). Changes wait as "not published" until **Publish** with a reason.
+  - **Change log** in plain words, under the admin's email.
+- `GET /v1/rules/tree` now also returns the checks in full, unpublished changes, question names and the change log.
+
 ## Built (2026-11-11): hosted at dashboard.boost-usa.com/tis
 
 - The backend + dashboard run on Boost's server under a path prefix: dashboard
