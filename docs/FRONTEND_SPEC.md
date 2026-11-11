@@ -207,6 +207,9 @@ Plus a separate **web admin** for TIS managers (rules, hazard library, analytics
   messages for wrong password, locked account, all seats in use, licence expired); Settings shows the person,
   organisation, licence (plan · valid until · photos used of the plan's photos this month) and Sign out. A session that ends (expired licence,
   disabled user, signed out elsewhere) brings the sign-in card back.
+- **Photo allowance notice** (2026-11-11): when the order's new photos don't fit in what is left of the month, a red
+  "Not enough photos left this month" box under Run AI review gives the numbers, the reset date and "ask your
+  administrator"; shown as soon as the order is ready and again if Run is refused.
 - **Settings → Dashboard** (2026-11-11): "Open the SmartFill dashboard" opens `<apiBase>/dashboard` in a new tab,
   with a line on what it shows (seats, computers signed in, photos this month, reviews).
 - **Branding** (2026-11-11): header = Boost star + "SmartFill" when signed out (and when the organisation has no

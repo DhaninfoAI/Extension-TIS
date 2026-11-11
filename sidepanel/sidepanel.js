@@ -10,7 +10,7 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 const send = msg => new Promise((ok, bad) => chrome.runtime.sendMessage(msg, r => {
   if (chrome.runtime.lastError) return bad(new Error(chrome.runtime.lastError.message));
   if (!r?.ok && r?.signIn) showSignIn(r.error);   // the session ended (or never started): ask to sign in
-  r?.ok ? ok(r.data) : bad(Object.assign(new Error(r?.error || 'no response'), { signIn: !!r?.signIn }));
+  r?.ok ? ok(r.data) : bad(Object.assign(new Error(r?.error || 'no response'), { signIn: !!r?.signIn, code: r?.code }));
 }));
 
 const TABS = [
@@ -246,16 +246,24 @@ function orderHint() {
   const p = S.prep && S.prep.orderId === S.det?.orderId ? S.prep : null;
   return p?.state === 'error' ? `Couldn't get the order ready (${p.error}). It will be read when you press Run AI review.` : '';
 }
+/** Not enough of the month's photos left for this order (checked once the order is ready, and when Run is refused). */
+const limitFor = orderId => (S.allow?.orderId === orderId && S.allow.limited && !S.allow.enough ? S.allow.message : '');
 function showOrderHint() {
   if (S.running || !S.det?.orderId) return;
-  $('hint').className = 'hint small err'; $('hint').textContent = orderHint();
+  const limit = limitFor(S.det.orderId);
+  $('hint').className = limit ? 'hint small limit' : 'hint small err';
+  $('hint').innerHTML = limit ? `<b>Not enough photos left this month</b><span>${esc(limit)}</span>` : esc(orderHint());
+}
+async function checkAllowance(orderId) {
+  const al = await send({ type: 'API', method: 'GET', path: `/v1/orders/${orderId}/photo-allowance` }).catch(() => null);
+  if (al) { S.allow = { orderId, ...al }; showOrderHint(); }
 }
 async function prepare(orderId) {
   if (S.demo || !S.tab || (S.prep?.orderId === orderId && S.prep.state !== 'error')) return;
   S.prep = { orderId, state: 'running' }; showOrderHint();
   try {
     const r = await send({ type: 'PREPARE', tabId: S.tab, orderId });
-    if (S.prep?.orderId === orderId) S.prep = { orderId, state: 'ready', ...r };
+    if (S.prep?.orderId === orderId) { S.prep = { orderId, state: 'ready', ...r }; checkAllowance(orderId); }
     if (!S.snapshot && S.orderId === orderId) { await loadIndex(); renderQuickLinks(); }   // the order's forms, for the quick links
   }
   catch (e) { if (S.prep?.orderId === orderId) S.prep = { orderId, state: 'error', error: friendlyError(e).replace(/\.$/, '') }; }
@@ -295,8 +303,14 @@ async function run() {
     const r = await send({ type: 'ANALYZE', tabId: S.tab, orderId, force: true });
     await stream(r.analysisId, r.cached);
     setConn('online', 'Online');
-  } catch (e) { setConn('error', 'Review failed'); const active = Object.entries(S.steps).find(([, v]) => v.state === 'active')?.[0] || 'scrape'; step(active, friendlyError(e), { err: true }); }
-  finally { S.running = false; $('btnRun').disabled = !(S.det.orderId); }
+  } catch (e) {
+    const active = Object.entries(S.steps).find(([, v]) => v.state === 'active')?.[0] || 'scrape';
+    if (e.code === 'IMAGE_LIMIT') {   // the plan's photos for the month: say so plainly, next to Run
+      S.allow = { orderId, limited: true, enough: false, message: e.message }; setConn('online', 'Online');
+      step('analyze', 'Not started: not enough photos left this month', { err: true });
+    } else { setConn('error', 'Review failed'); step(active, friendlyError(e), { err: true }); }
+  }
+  finally { S.running = false; $('btnRun').disabled = !(S.det.orderId); showOrderHint(); refreshUsage(); if (S.allow?.orderId === orderId && S.allow.enough !== false) checkAllowance(orderId); }
 }
 
 function onMessage(msg) {

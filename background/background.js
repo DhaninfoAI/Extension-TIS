@@ -72,7 +72,7 @@ async function api(method, path, body, { raw = false } = {}, retried = false) {
   const json = await res.json().catch(() => ({}));
   if (res.status === 401 && !retried && (await getAuth())) { await refreshNow(); return api(method, path, body, { raw }, true); }   // expired between check and call
   if (res.status === 401) throw signInError(json.error?.message);
-  if (!res.ok) throw new Error(json.error?.message || `HTTP ${res.status}`);
+  if (!res.ok) throw Object.assign(new Error(json.error?.message || `HTTP ${res.status}`), { code: json.error?.code });   // e.g. IMAGE_LIMIT
   return raw ? { status: res.status, json } : json;
 }
 
@@ -217,6 +217,6 @@ chrome.runtime.onMessage.addListener((msg, sender, reply) => {
       case 'SHOW_PHOTOS': return toTab(msg.tabId, { type: 'SHOW_PHOTOS', orderId: msg.orderId, imageIds: msg.imageIds, exts: msg.exts, captions: msg.captions, index: msg.index });
       default: throw new Error('unknown message ' + msg.type);
     }
-  })().then(r => reply({ ok: true, data: r }), e => reply({ ok: false, error: e.message, signIn: !!e.signIn }));
+  })().then(r => reply({ ok: true, data: r }), e => reply({ ok: false, error: e.message, code: e.code, signIn: !!e.signIn }));
   return true;
 });

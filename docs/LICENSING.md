@@ -31,9 +31,15 @@ plan, and their licence gets that plan's photos and seats. One licence per custo
   our changes.
 - Practice mode (no AI) reviews no photos and counts nothing.
 - Before a review starts, the backend counts the order's photos that still need the AI. If they don't fit in what is
-  left this month, the review is refused (402 `IMAGE_LIMIT`): "This order has 49 photos to review, but only 2 of your
-  plan's 5,000 photos are left this month. Please contact your administrator for more photos." Raise the customer's
-  photos (Edit) or move them to a bigger plan and they can continue at once.
+  left this month, the review is refused (402 `IMAGE_LIMIT`, with `details: {need, left, cap, resetsOn}`): "This order
+  has 49 new photos for the AI to review, but only 2 of your plan's 5,000 photos are left this month. The allowance
+  resets on Dec 1. Ask your administrator for more photos. Orders already reviewed can still be re-run." Raise the
+  customer's photos (Edit) or move them to a bigger plan and they can continue at once.
+- **The reviewer is told before Run (2026-11-11)**: once an order is ready, the panel asks
+  `GET /v1/orders/{id}/photo-allowance` (`{limited, cap, used, left, need, enough, resetsOn, message}`; admins and
+  practice mode: `{limited:false}`) and, if it doesn't fit, shows a red **"Not enough photos left this month"** notice
+  under Run AI review. A refused Run shows the same notice and marks the AI review step "Not started: not enough photos
+  left this month". The photos-left meter refreshes after every Run.
 
 Suggested commercial shape (the numbers are yours to set; the starting plans are placeholders):
 - **Monthly or annual subscription per plan** = a photo bundle (e.g. 5,000 / 15,000 / 50,000 photos per month) with

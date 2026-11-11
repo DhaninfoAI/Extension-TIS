@@ -3,6 +3,15 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-11): photo allowance shown before Run
+
+- The plan's photos per month were enforced only when Run was pressed, and a refusal showed as one small line in the
+  progress list, easy to miss. Now the panel checks, once the order is ready, whether its new photos fit in what is
+  left (`GET /v1/orders/{id}/photo-allowance`) and shows a red **"Not enough photos left this month"** notice under
+  Run AI review with the numbers, the reset date and what to do; a refused Run shows the same notice. The meter
+  refreshes after every Run. Already reviewed orders can still be re-run (their photos are free).
+- `LICENSING.md` → photo allowance. Tests in `backend/test/auth.mjs` (40).
+
 ## Built (2026-11-11): version 1.0.0, Web Store package
 
 - Extension version **1.0.0** for the first Chrome Web Store release. `tools/pack.ps1` builds
