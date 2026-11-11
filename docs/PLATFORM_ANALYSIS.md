@@ -158,6 +158,8 @@ onclick="flag('cbox', 'No', 'F2_111470_1_10707236', '111470_1_11384147', '', '',
 // F4 selects: onchange="flag('radio','No',this[this.selectedIndex].value,'111473_1_11384182','','','')"
 ```
 
+- Some trigger lists end with `|` (`'Yes-verbally, w/o documentation|No-not upgraded|'`, General Form Q27 on 1169277):
+  that empty entry is not a real trigger; SmartFill ignores it (a blank answer never needs a recommendation).
 - When the selected value is in the trigger list (`'No'`, or `'A|B'`), `flag()`
   shows `#flagrecshow<recId>` containing `textarea[name=F13_<recId>]`
   ("Recommendation" box). Otherwise it hides it.

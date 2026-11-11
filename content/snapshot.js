@@ -68,7 +68,7 @@
     const recOf = attr => {
       const m = /flag\(([^)]*)\)/.exec(attr || ''); if (!m) return undefined;
       const args = [...m[1].matchAll(/'([^']*)'|([^,\s][^,]*)/g)].map(x => (x[1] ?? x[2]).trim());
-      const trigger = (args[1] || '').split('|'), id = args[3]; if (!id) return undefined;
+      const trigger = (args[1] || '').split('|').filter(t => t.trim()), id = args[3];   // 'A|B|' ends with '|': a blank answer is not a trigger if (!id) return undefined;
       const line = clean(args[5] || '');
       if (/_/.test(id) || d.getElementsByName('F13_' + id).length) return { key: 'F13_' + id, trigger, text: '', box: 'question' };
       const box = areas.find(t => t.name.endsWith('_' + id) && /^F\d+_\d+_\d+_\d+$/.test(t.name));

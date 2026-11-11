@@ -3,6 +3,21 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-11): two false alarms on recommendations (order 1169277)
+
+- **Blank answer ≠ needs a recommendation.** EZ's flag lists sometimes end with "|" ("Yes-verbally…|No-not
+  upgraded|"), which the snapshot read as "a blank answer triggers a rec": Q27 (branch aluminum wiring), unanswered,
+  became a must-fix and the AI drafted an electrician rec for it. Now a blank answer never triggers (`recTriggered` in
+  `backend/lib/snapshot.mjs`, used by the rule, the AI recommendations step and the practice step; the extension's
+  snapshot drops empty triggers too).
+- **Duplicates compare what the recs are about**, not their wording: "Restore parking lot…" and "Restore sidewalks…
+  to a smooth & even condition" are no longer flagged; "Restore parking lot…" vs "Repair the parking lot potholes…"
+  still is. `recs.duplicates` now uses `recSame` (moved to `snapshot.mjs`, condition words such as restore / smooth /
+  even / condition ignored).
+- Duplicate cards name the recommendations by their words (or "Rec 3"), not `F13_…` field codes.
+- On 1169277 the rule engine now gives 1 finding (the cinderblock-stairs wording) instead of 3. Tests:
+  `backend/test/rec-checks.mjs` (6).
+
 ## Built (2026-11-11): AI rules tab in the dashboard (replaces the /rules page)
 
 - Admins get an **AI rules** tab in the dashboard (`/dashboard#rules`; the old `/rules` address forwards there). No
