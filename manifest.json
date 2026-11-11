@@ -11,6 +11,7 @@
   ],
   "host_permissions": [
     "*://*.ezsurveyform.com/*",
+    "https://dashboard.boost-usa.com/*",
     "http://localhost:4010/*"
   ],
   "action": {

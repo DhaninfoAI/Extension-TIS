@@ -3,7 +3,7 @@
 // for local testing; it is empty by default, so a customer's extension always asks them to sign in.
 
 export const DEFAULTS = {
-  apiBase: 'http://localhost:4010',
+  apiBase: 'https://dashboard.boost-usa.com/tis',   // hosted backend (local development: http://localhost:4010)
   token: '',
 };
 

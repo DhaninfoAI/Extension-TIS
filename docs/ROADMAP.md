@@ -3,6 +3,18 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-11): hosted at dashboard.boost-usa.com/tis
+
+- The backend + dashboard run on Boost's server under a path prefix: dashboard
+  `https://dashboard.boost-usa.com/tis/dashboard`, API base `https://dashboard.boost-usa.com/tis`, rules `/tis/rules`.
+  The extension's default `apiBase` points there (`common/config.js`, `manifest.json` host permission; localhost:4010
+  still allowed for local work).
+- Prefix support without editing files on the server: `BASE_PATH=/tis` (cookie path; the app removes the prefix
+  itself if nginx passes it on), and the dashboard and rules pages work out the prefix from their own address.
+- The rules page signs in with the dashboard's sign-in (no typed token) and the rules API is **admin-only**
+  (customers could previously read and change rules). Changes are logged under the admin's email.
+- Hosting kit and guide: `backend/deploy/` (`DEPLOY.md` → "Hosting under a path").
+
 ## Built (2026-11-11): SmartFill (Boost) branding, customer + platform from the sign-in
 
 - The extension is now **SmartFill** (manifest name, panel title, toolbar tooltip) with the **Boost star** icons from
