@@ -155,6 +155,8 @@ Plus a separate **web admin** for TIS managers (rules, hazard library, analytics
 - **Photos → "Hazards with a drafted recommendation"** (2026-11-10): a photo hazard the review wrote a recommendation
   for is a one-line pointer (thumbnail, hazard, what was seen, "See in Recs ›"), not a card of its own and not counted;
   "Hazards without a recommendation" lists only hazards with no rec at all.
+- **No prior report** (2026-11-13): when the order has no earlier survey, Overview ends with "Prior report" and "No
+  prior report for this order, so there is nothing to compare." (before, the section was simply missing).
 - **Prior report on Overview** (redesigned 2026-11-10): "Prior report 1161189 · 9/21/26 · Open ↗" and a table
   Prior | Now | mark per fact (Square footage, Buildings, ISO class, Sprinklers). Marks: "Same" (green),
   "Differs" (red), "Other scope" (amber: the reports cover a different number of buildings), "Not compared" (one side

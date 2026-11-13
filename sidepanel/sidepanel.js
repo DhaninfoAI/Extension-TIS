@@ -580,6 +580,8 @@ function viewOverview() {
 const PRIOR_LABEL = { sqft: 'Square footage', iso: 'ISO class', sprinkler: 'Sprinklers', buildings: 'Buildings' };
 function priorBox() {
   const m = S.analysis.modules.priorReport, s = m?.summary || {};
+  // the order has no earlier survey linked in EZ: say so, so an empty end of Overview doesn't look like a missing step
+  if (m?.status === 'done' && s.priorReports === 0 && !(m.items || []).length) return '<h3>Prior report</h3><p class="small muted">No prior report for this order, so there is nothing to compare.</p>';
   if (!s.prior) return (m?.items || []).length ? `<h3>Prior report</h3>${list(m.items, '')}` : '';   // older reviews
   const p = s.prior, open = !S.demo && S.origin ? `<button class="link sm" data-act="openprior" data-order="${esc(p.orderId)}">Open ↗</button>` : '';
   const head = `<h3 class="prior-head">Prior report ${esc(p.orderId)}${p.date ? ` · ${esc(p.date)}` : ''} ${open}</h3>`;

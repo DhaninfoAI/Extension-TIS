@@ -3,6 +3,13 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-13): "No prior report" on Overview
+
+- An order without an earlier survey ended Overview after Pricing with nothing, which looked like a missing step.
+  Now: "Prior report · No prior report for this order, so there is nothing to compare." (`priorBox`, panel only;
+  shown when the prior-report step ran and found none). Checked in the harness on 1166307 (light + dark); 1166305
+  still shows its comparison table.
+
 ## Built (2026-11-13): duplicate-recommendation cards removed (1166310)
 
 - 1166310 offered "Duplicate recommendations" merging the electrician rec with the fire-extinguisher tag rec (Apply
