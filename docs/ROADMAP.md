@@ -23,6 +23,21 @@
   clutter in an electrical room, roof ponding. New subject: vacant-building window/door openings.
 - Tests: `qc-fixes.mjs` (33).
 
+## Built (2026-11-13): order drill-down in the dashboard
+
+- Orders tab: the order number opens the order in detail (← All orders to go back). For customers and admins: order
+  facts (insured, location, client, inspector, request, coverage), tiles (findings + must fix; reviewer decisions:
+  applied / dismissed / undone / not acted on; photos checked by the AI "x of y"; last review, by whom, time, number of
+  reviews), "The AI part didn't run for: …" when it didn't, and every open finding of the latest review with severity,
+  area, title, message and what the reviewer did (pill + dismiss reason + when), with filters All / Must fix / Not
+  acted on / Dismissed / Applied. Decisions: the panel's Apply / Dismiss / Undo events for that review (last one
+  wins), then the saved QC outcome.
+- Admins also: AI cost, calls, tokens and models of the last review; photos looked at vs reused; cost by step; how
+  each step ran (engine, fallback reason); every review of the order with time and cost.
+- `GET /v1/dashboard/orders/:orderId` (`buildOrderDetail` in `lib/dashboard.mjs`); customers get their own
+  organisation's orders only and nothing technical. Tests: `test/order-detail.mjs` (11). Checked on the local test
+  data at desktop and phone width, light and dark.
+
 ## Built (2026-11-13): version 1.0.5
 
 - `manifest.json` 1.0.0 → **1.0.5**, with all of 2026-11-13's panel/viewer fixes (photos the AI didn't check,

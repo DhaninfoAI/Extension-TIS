@@ -124,7 +124,9 @@ refreshToken (extension only), user, org}` · `POST /v1/auth/refresh {refreshTok
 dashboard). Computers (any signed-in user; customers only their own organisation, admins all or `?org=`):
 `GET /v1/devices` → `{devices:[{deviceId, name, browser, user:{name,email}, signedInAt, lastActiveAt}]}`,
 `POST /v1/devices/{deviceId}/sign-out`. The extension's login also sends `deviceId` and `deviceName`. Dashboard:
-`GET /v1/dashboard?from=&to=&org=` (role decides the content). Errors a customer can see are written for them:
+`GET /v1/dashboard?from=&to=&org=` (role decides the content); `GET /v1/dashboard/orders/{orderId}` = one order's
+latest review in detail (Orders tab → click the order number; customers only their organisation's orders, admins also
+AI cost per step, models, how each step ran and every run). Errors a customer can see are written for them:
 `INVALID_CREDENTIALS`, `ACCOUNT_LOCKED`, `SEAT_LIMIT`, `LICENCE_EXPIRED`, `ORG_SUSPENDED`, `IMAGE_LIMIT` (402).
 Plans: `GET /v1/admin/plans`, `PUT /v1/admin/plans {plans:[{name, imagesPerMonth, seats, price}]}` (admin).
 
