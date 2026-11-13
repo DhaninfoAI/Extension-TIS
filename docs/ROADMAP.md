@@ -3,6 +3,20 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-13): narrative cards follow the draft's rules (1166305)
+
+- Decided with the user: TIS's question set + example narratives (the draft's rules) are the standard; the checks
+  follow them. Before, the AI also raised free-form "Missing from the narrative: X" cards that the draft itself never
+  fixed (1166305: coverage type "Package", "no tenants", "no handrails", "no emergency lighting").
+- Draft (`prompts/narrative.md` §4): covers every question of the set the report answers, in the examples' order and
+  wording; never writes "not applicable"/"N/A" to tick a question off; the coverage question only decides whether
+  the liability topics belong (TIS's 50 examples never state the policy type).
+- Checks: the AI's issues are errors only (contradiction, stale value, spelling, grammar, style); `missing_required`
+  is gone from the schema and filtered in code. Missing content comes only from the question set ("Narrative leaves
+  out N facts", "Not in the report"); a "no" to hazardous tenants is not a left-out fact.
+- Real run on 1166305 (local test server, $0.11): no narrative cards, 33 of 33 answered, draft without "not
+  applicable" or the policy type. Tests: `test:ai` (28).
+
 ## Built (2026-11-13): narrative links and a follow-up question (1166305)
 
 - "Missing from the narrative: coverage" had "Go to question" on **Date of Survey**: the AI names a form field for each

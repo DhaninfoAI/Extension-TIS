@@ -26,7 +26,15 @@ function refreshNow() {
     const r = await fetch(apiBase + '/v1/auth/refresh', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ refreshToken: a.refreshToken }) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) {
-      if (r.status === 401 || r.status === 403) { await setAuth(null); broadcast({ type: 'AUTH_CHANGED', signedIn: false, message: j.error?.message }); throw signInError(j.error?.message); }
+      if (r.status === 401 || r.status === 403) {
+        // a sign-in the server no longer accepts (or one from another server, e.g. after switching to a local test
+        // server): forget it. With a developer token configured that becomes the sign-in; customers have none.
+        await setAuth(null);
+        const s = await authState(), { token } = await getConfig();
+        broadcast({ type: 'AUTH_CHANGED', signedIn: s.signedIn, message: j.error?.message });
+        if (token) return token;
+        throw signInError(j.error?.message);
+      }
       throw new Error(j.error?.message || `HTTP ${r.status}`);
     }
     await setAuth(keep(j)); return j.accessToken;

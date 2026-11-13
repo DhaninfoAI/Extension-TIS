@@ -79,6 +79,9 @@ Implied by the client docs (the KB is literally a *QC* knowledge base):
 
 ## Decisions so far
 
+- 2026-11-13: the narrative draft's rules (TIS's question set + example narratives) are the standard. A card says
+  something is missing only when the draft would write it; the AI's own "does not mention X" cards were removed.
+  The draft never writes "not applicable" sentences or the policy type.
 - 2026-11-13: a narrative card links to a form question only when that question is clearly about the card's topic
   (no link beats a wrong one). The hazardous-operations question is not asked when there are no hazardous tenants.
 - 2026-11-13: photos the AI didn't check are named in the panel and viewer ("35 of 38 photos were checked by the AI",
