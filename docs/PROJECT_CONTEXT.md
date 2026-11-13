@@ -79,6 +79,8 @@ Implied by the client docs (the KB is literally a *QC* knowledge base):
 
 ## Decisions so far
 
+- 2026-11-13: a narrative card links to a form question only when that question is clearly about the card's topic
+  (no link beats a wrong one). The hazardous-operations question is not asked when there are no hazardous tenants.
 - 2026-11-13: photos the AI didn't check are named in the panel and viewer ("35 of 38 photos were checked by the AI",
   Not checked filter); a failed load in the viewer says so with Try again instead of "not reviewed".
 - 2026-11-10: no final check in the panel. Save QC outcome records every finding's decision (applied / dismissed +

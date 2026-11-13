@@ -3,6 +3,18 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-13): narrative links and a follow-up question (1166305)
+
+- "Missing from the narrative: coverage" had "Go to question" on **Date of Survey**: the AI names a form field for each
+  narrative issue and that key was used unchecked. `issueField` keeps it only when the question shares a word (or word
+  stem) with the issue's topic, or holds the form value the issue quotes; otherwise the card has no link. It does not
+  search for another field ("coverage" also appears in a sprinkler question).
+- "Not in the report: Describe the nature of any hazardous commercial operations…" on a 100% vacant building: q15 is a
+  follow-up to q14 ("Are there any hazardous commercial tenants?"). `notAsked` drops q15 when the report answers q14
+  with no / none / N/A / vacant, and it no longer counts in "N of M answered". "N/A" answers are left out of "Not in
+  the report" too.
+- Tests: `backend/test/narrative-links.mjs` (17). Takes effect on the next Run after the backend is deployed.
+
 ## Built (2026-11-13): photos the AI didn't check are shown
 
 - A photo can end up without an AI result: its file couldn't be read from EZ or was refused, the AI left it out of
