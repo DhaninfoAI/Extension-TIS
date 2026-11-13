@@ -14,6 +14,10 @@
 - Checks: the AI's issues are errors only (contradiction, stale value, spelling, grammar, style); `missing_required`
   is gone from the schema and filtered in code. Missing content comes only from the question set ("Narrative leaves
   out N facts", "Not in the report"); a "no" to hazardous tenants is not a left-out fact.
+- A later run on 1166305 raised a blocker "Narrative contradicts the form: ownership duration" for "approximately
+  nine years" vs Form "9 years" (fix: "six years", in neither). `restatesForm` drops a contradiction when the
+  narrative quote states every number of the form value (number words read as digits: nine = 9, twenty-five = 25,
+  14,450 = 14450). Values without numbers (Yes/No) are left to the other checks. Tests: `narrative-links.mjs` (23).
 - Real run on 1166305 (local test server, $0.11): no narrative cards, 33 of 33 answered, draft without "not
   applicable" or the policy type. Tests: `test:ai` (28).
 
