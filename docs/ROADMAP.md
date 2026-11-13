@@ -23,6 +23,14 @@
   clutter in an electrical room, roof ponding. New subject: vacant-building window/door openings.
 - Tests: `qc-fixes.mjs` (33).
 
+## Built (2026-11-13): prior report with nothing to compare (1168085)
+
+- 1168085 and its prior 1165501 are both recommendation checks: no square footage, ISO class or sprinklers on
+  either, so the table showed only "–" and "Not compared". When every row is empty on both sides, `priorBox` now
+  shows one line instead ("Neither report records square footage, ISO class or sprinklers, so there is nothing to
+  compare."), plus "A recommendation check doesn't include them." on a rec-check order. Harness: 1168085 (light +
+  dark); 1166305 keeps its table.
+
 ## Built (2026-11-13): "No prior report" on Overview
 
 - An order without an earlier survey ended Overview after Pricing with nothing, which looked like a missing step.

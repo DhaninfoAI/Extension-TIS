@@ -155,6 +155,10 @@ Plus a separate **web admin** for TIS managers (rules, hazard library, analytics
 - **Photos → "Hazards with a drafted recommendation"** (2026-11-10): a photo hazard the review wrote a recommendation
   for is a one-line pointer (thumbnail, hazard, what was seen, "See in Recs ›"), not a card of its own and not counted;
   "Hazards without a recommendation" lists only hazards with no rec at all.
+- **Nothing to compare** (2026-11-13): when neither report records any of the compared facts (e.g. two
+  recommendation checks, 1168085 vs 1165501), one line replaces the table of dashes: "Neither report records square
+  footage, ISO class or sprinklers, so there is nothing to compare." (+ "A recommendation check doesn't include
+  them." on a rec-check order).
 - **No prior report** (2026-11-13): when the order has no earlier survey, Overview ends with "Prior report" and "No
   prior report for this order, so there is nothing to compare." (before, the section was simply missing).
 - **Prior report on Overview** (redesigned 2026-11-10): "Prior report 1161189 · 9/21/26 · Open ↗" and a table

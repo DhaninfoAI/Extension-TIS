@@ -596,6 +596,13 @@ function priorBox() {
     const a = n(r.prior), b = n(r.current); if (!a || !b) return '';
     const d = b - a; return `<small>${d > 0 ? '+' : '−'}${Math.abs(d).toLocaleString('en-US')} sf (${d > 0 ? '+' : '−'}${Math.abs(Math.round(d / a * 100))}%)</small>`;
   };
+  // neither report records any of these facts (1168085 and its prior 1165501, 2026-11-13: two recommendation checks):
+  // one line instead of a table of dashes and "Not compared"
+  if (rows.length && rows.every(r => r.prior == null && r.current == null)) {
+    const what = rows.map(r => String(PRIOR_LABEL[r.key] || r.label).replace(/^[A-Z][a-z]/, c => c.toLowerCase())), list = what.length > 1 ? `${what.slice(0, -1).join(', ')} or ${what.at(-1)}` : what[0];
+    const recCheck = /rec(ommendation)?\s*check/i.test(`${S.analysis.modules.orderBrief?.summary?.requestType || ''} ${(S.snapshot?.order?.orderForm?.coverages || []).join(' ')}`);
+    return `${head}<p class="small muted">Neither report records ${esc(list)}, so there is nothing to compare.${recCheck ? ' A recommendation check doesn’t include them.' : ''}</p>`;
+  }
   const b = rows.find(r => r.key === 'buildings');
   const scope = rows.find(r => r.scope);
   return `${head}
