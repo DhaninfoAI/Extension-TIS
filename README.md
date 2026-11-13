@@ -1,6 +1,6 @@
 # SmartFill (Chrome extension)
 
-AI-assisted QC for Technical Insurance Services reports on EZSurveyForm. **v1.0.0** (2026-11-11, first Chrome Web Store release).
+AI-assisted QC for Technical Insurance Services reports on EZSurveyForm. **v1.0.5** (2026-11-13; v1.0.0 was the first Chrome Web Store release, 2026-11-11).
 Reads an EZ order (forms, recommendations, photos), sends it to the backend (`../backend`), and shows the review
 in a TIS-branded side panel. Every suggestion can be **applied into the EZ form**, undone, or dismissed with a
 reason. Nothing is saved in EZ until the reviewer clicks EZ's own Save. Project guide: `../CLAUDE.md`.

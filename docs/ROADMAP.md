@@ -23,6 +23,13 @@
   clutter in an electrical room, roof ponding. New subject: vacant-building window/door openings.
 - Tests: `qc-fixes.mjs` (33).
 
+## Built (2026-11-13): version 1.0.5
+
+- `manifest.json` 1.0.0 → **1.0.5**, with all of 2026-11-13's panel/viewer fixes (photos the AI didn't check,
+  "No prior report", nothing-to-compare line, narrative box with text, documents not photos, viewer browsing a
+  card's own photos, sign-in fallback to the developer token). The panel footer reads the version from the manifest;
+  the harness stub reports 1.0.5 too. Upload to the Web Store with `tools/pack.ps1` as for 1.0.0.
+
 ## Built (2026-11-13): photo viewer browses the card's own photos
 
 - Clicking a card's photo (Checks, Recs, Answers, Photos findings…) opened the on-page viewer with all the order's
