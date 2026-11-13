@@ -3,6 +3,16 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-13): property-only order with the General Form (1166307)
+
+- "Form type does not match coverage… Order is Monoline Property but the full General Form (with GL sections) is
+  attached" showed on 1166307, whose five liability sections were all omitted (the normal way to do a property-only
+  survey on the General Form). `order.form_vs_coverage` now warns only about liability sections of the General Form
+  still open, by name ("…not omitted: Liability Hazards, Products Liability. Omit them."). Public Protection and
+  Exposures ("omit on Liability Only") are not liability sections. A filled-in Liability Hazards / Professional / Auto
+  section is left to `order.omit_sections_vs_coverage`, which has the Apply that omits it.
+- Tests: `qc-fixes.mjs` (27), `e2e.mjs` (1166307: no warning). The live 1166307 snapshot gives no card.
+
 ## Built (2026-11-13): narrative cards follow the draft's rules (1166305)
 
 - Decided with the user: TIS's question set + example narratives (the draft's rules) are the standard; the checks
