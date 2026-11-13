@@ -3,6 +3,15 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-13): Yes/No cards that misquote another answer (1168084)
+
+- 1168084 (live order): blocker "3. Load-bearing substrate… Concrete block → N/A: Brick veneer is marked as 'No'",
+  while question 2 said "Yes (close-up photos required)" (the snapshot had it right; the AI misread it).
+- `misquotesAnswer`: a card whose reason says "<subject> is marked/answered/set as '<value>'" is dropped when the
+  questions about that subject (every word of it in the question) hold a different value. Subjects no question
+  matches are not judged. On the local test data it drops only this card (1 of 32 stored answer cards).
+- Tests: `qc-fixes.mjs` (37).
+
 ## Built (2026-11-13): Yes/No changes must be backed by the photo result (1166312)
 
 - 1166312: blocker "21. Housekeeping satisfactory…? Yes → No: Photo 18441419 shows a dumpster area with accumulated
