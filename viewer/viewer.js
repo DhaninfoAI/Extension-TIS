@@ -52,7 +52,7 @@ async function load() {
   const [analysis, snap] = await Promise.all([
     send({ type: 'LATEST', orderId: V.orderId }).catch(() => null),
     send({ type: 'API', method: 'GET', path: `/v1/orders/${V.orderId}/snapshot` }).catch(() => null)]);
-  V.analysis = analysis; V.snapshot = snap?.snapshot || null;
+  V.analysis = analysis; V.snapshot = snap?.snapshot || null; V.insights = {}; V.checked = checkedSet();
   V.itemState = analysis ? ((await chrome.storage.session.get('items_' + analysis.analysisId).catch(() => ({})))['items_' + analysis.analysisId] || {}) : {};
   const o = V.snapshot?.order || {};
   $('vOrder').textContent = `Order ${V.orderId}`;
@@ -75,15 +75,25 @@ function render() {
 }
 
 // ---------------------------------------------------------------- photos
+// `engine` is hidden from customers; `summary.vision` says whether the images were looked at (older reviews: `cached`)
+const sawImages = () => { const pr = V.analysis?.modules?.photoReview; return pr?.summary?.vision ?? (pr?.summary?.cached != null || pr?.engine === 'openai'); };
+const photoAiDown = () => V.analysis?.aiStatus?.ok === false && (V.analysis.aiStatus.modules || []).includes('photoReview');
+/** The photos the AI has a result for in this review, or null when that isn't known (no vision pass, AI down, or a
+ *  review made before `checked` existed). The order's other photos are "not checked by the AI". */
+function checkedSet() {
+  const c = V.analysis?.modules?.photoReview?.summary?.checked;
+  return sawImages() && !photoAiDown() && Array.isArray(c) ? new Set(c.map(String)) : null;
+}
 function photoFacts(id) {
   const hz = itemsOf(['photoReview']).filter(i => i.evidence?.photos?.includes(id) && (isOpen(i) || i.recDrafted));   // recDrafted: the rec on the Recs tab is the action
   const ren = itemsOf(['captions']).find(i => i.evidence?.photos?.includes(id) && isOpen(i));
   const p = photos().find(x => x.imageId === id) || {};
   const recs = (V.snapshot?.recommendations || []).filter(r => String(r.imageOptionValue || '').startsWith(id + 't') || String(r.imageOptionValue || '').startsWith(id + '.'));
-  return { p, hz, ren, recs, hazard: hz.some(i => i.severity === 'blocker'), check: hz.length > 0, rec: !!p.usedAsRecImage || recs.length > 0, marked: !!p.markedHazard };
+  return { p, hz, ren, recs, hazard: hz.some(i => i.severity === 'blocker'), check: hz.length > 0, rec: !!p.usedAsRecImage || recs.length > 0, marked: !!p.markedHazard,
+    unchecked: !!V.checked && !V.checked.has(String(id)) };
 }
 const tags = f => `${f.hazard ? '<span>Hazard</span>' : f.check ? '<span class="adv">Check</span>' : ''}${f.ren ? '<span class="ren">Rename</span>' : ''}${f.rec ? '<span class="rec">Rec</span>' : ''}${f.marked ? '<span class="mk">Marked</span>' : ''}`;
-const FILTERS = [['all', 'All'], ['hazards', 'Hazards', f => f.check], ['rename', 'Rename', f => !!f.ren], ['rec', 'Rec photos', f => f.rec], ['marked', 'Marked by inspector', f => f.marked]];
+const FILTERS = [['all', 'All'], ['hazards', 'Hazards', f => f.check], ['rename', 'Rename', f => !!f.ren], ['rec', 'Rec photos', f => f.rec], ['marked', 'Marked by inspector', f => f.marked], ['unchecked', 'Not checked by AI', f => f.unchecked]];
 
 function filtered() {
   const s = V.search.trim().toLowerCase(), test = FILTERS.find(x => x[0] === V.filter)?.[2];
@@ -93,13 +103,12 @@ function renderPhotos() {
   const all = photos().map(p => photoFacts(p.imageId));
   $('pFilters').innerHTML = FILTERS.map(([k, l, t]) => { const n = t ? all.filter(t).length : all.length;
     return (n || k === 'all' || k === V.filter) ? `<button data-f="${k}" aria-pressed="${V.filter === k}">${l} ${n}</button>` : ''; }).join('');
-  const pr = V.analysis?.modules?.photoReview;
-  // `engine` is hidden from customers; `summary.vision` says whether the images were looked at (older reviews: `cached`)
-  $('pNote').hidden = pr?.summary?.vision ?? (pr?.summary?.cached != null || pr?.engine === 'openai');
-  const aiDown = V.analysis?.aiStatus?.ok === false && (V.analysis.aiStatus.modules || []).includes('photoReview');
-  if (aiDown || !V.analysis) $('pNote').hidden = false;
-  $('pNote').textContent = !V.analysis ? 'Not reviewed yet. Press Run AI review in the panel to mark hazards and photo names to fix.'
-    : aiDown ? "The AI couldn't look at these photos this time, so they were checked by caption only. Run the review again from the panel." : 'These photos were checked by caption only. Run the review from an open EZ order to include the images.';
+  const nUn = all.filter(f => f.unchecked).length;
+  const note = !V.analysis ? 'Not reviewed yet. Press Run AI review in the panel to mark hazards and photo names to fix.'
+    : photoAiDown() ? "The AI couldn't look at these photos this time, so they were checked by caption only. Run the review again from the panel."
+    : !sawImages() ? 'These photos were checked by caption only. Run the review from an open EZ order to include the images.'
+    : nUn ? `${all.length - nUn} of ${all.length} photos were checked by the AI. Run the review again from the panel to check the other ${nUn === 1 ? 'one' : nUn} (filter: Not checked by AI).` : '';
+  $('pNote').hidden = !note; $('pNote').textContent = note;
   V.list = filtered();
   $('pGrid').innerHTML = V.list.length ? V.list.map(p => { const f = photoFacts(p.imageId);
     return `<button class="vtile" data-photo="${esc(p.imageId)}" title="${esc(p.caption)}"><span class="im">${imgTag(p)}<span class="flags">${tags(f)}</span><span class="num">${p.order ?? ''}</span></span>
@@ -132,14 +141,29 @@ async function showAt(i) {
   pvFit();
   for (const t of $('pvStrip').querySelectorAll('img')) t.classList.toggle('on', Number(t.dataset.i) === V.idx);
   $('pvStrip').querySelector('img.on')?.scrollIntoView({ block: 'nearest', inline: 'center' });
-  renderInfo(p, f, null);
-  if (!(p.imageId in V.insights)) V.insights[p.imageId] = (await send({ type: 'API', method: 'GET', path: `/v1/orders/${V.orderId}/photos/${p.imageId}/insight` }).catch(() => null))?.insights?.at(-1) || null;
-  if (V.list[V.idx] === p) renderInfo(p, f, V.insights[p.imageId]);
+  await loadInfo(p, f);
 }
-function renderInfo(p, f, ins) {
+/** What the AI saw for this photo. A failed request (network, sign-in) is not kept, so "Try again" or opening the
+ *  photo again asks once more; only an answer from the server can say "not checked by the AI". */
+async function loadInfo(p, f = photoFacts(p.imageId)) {
+  if (!(p.imageId in V.insights)) {
+    renderInfo(p, f, null);
+    const r = await send({ type: 'API', method: 'GET', path: `/v1/orders/${V.orderId}/photos/${p.imageId}/insight` }).then(d => ({ ok: true, d }), () => ({ ok: false }));
+    if (r.ok) V.insights[p.imageId] = r.d?.insights?.at(-1) || null;
+    if (V.list[V.idx] !== p) return;
+    if (!r.ok) return renderInfo(p, f, null, true);
+  }
+  renderInfo(p, f, V.insights[p.imageId]);
+}
+function renderInfo(p, f, ins, failed = false) {
+  const none = !V.analysis ? 'Not reviewed yet. Press Run AI review in the panel.'
+    : f.unchecked ? 'The AI has not checked this photo yet. Run the review again from the panel to include it.'
+    : 'This photo was not reviewed by the AI.';
   $('pvInfo').innerHTML = `<h2>${esc(p.caption || 'No caption')}</h2><div class="small muted">Photo ${p.order ?? '–'} of ${photos().length} · ID ${esc(p.imageId)}</div>
     ${tags(f) ? `<div class="tags">${tags(f)}</div>` : ''}
-    <h3>What the AI sees</h3>${ins ? `<p>${esc(ins.description)}</p>` : `<p class="muted">${p.imageId in V.insights ? 'This photo was not reviewed by the AI.' : 'Loading…'}</p>`}
+    <h3>What the AI sees</h3>${ins ? `<p>${esc(ins.description)}</p>`
+      : failed ? `<p class="muted">Couldn't load what the AI saw for this photo. <button class="link sm" data-pv="retry">Try again</button></p>`
+      : `<p class="muted">${p.imageId in V.insights ? esc(none) : 'Loading…'}</p>`}
     ${f.hz.length ? `<h3>Hazards</h3>${f.hz.map(i => `<div class="hz ${i.severity}"><b>${esc(i.title)}</b>${esc(i.message || '')}${i.recDrafted ? '<div class="small muted" style="margin-top:4px">A recommendation has been drafted: see the Recs tab in the panel.</div>' : i.suggestedRec ? `<div class="small muted" style="margin-top:4px">Suggested rec: ${esc(i.suggestedRec)}</div>` : ''}</div>`).join('')}` : ''}
     ${f.ren ? `<h3>Suggested name</h3><div class="rn"><s>${esc(f.ren.current)}</s> → <ins>${esc(f.ren.suggested)}</ins></div>` : ''}
     ${f.recs.length ? `<h3>Used for recommendation</h3>${f.recs.map(r => `<p class="small">${esc(r.text)}</p>`).join('')}` : ''}
@@ -240,7 +264,7 @@ function initEvents() {
   const stage = $('pvStage');
   $('pv').onclick = e => {
     const a = e.target.closest('[data-pv]')?.dataset.pv, i = e.target.closest('#pvStrip img')?.dataset.i;
-    if (a) ({ prev: () => showAt(V.idx - 1), next: () => showAt(V.idx + 1), in: () => pvZoom(0.25), out: () => pvZoom(-0.25), fit: pvFit, info: () => $('pv').classList.toggle('no-info'), close: () => ($('pv').hidden = true) })[a]();
+    if (a) ({ prev: () => showAt(V.idx - 1), next: () => showAt(V.idx + 1), in: () => pvZoom(0.25), out: () => pvZoom(-0.25), fit: pvFit, info: () => $('pv').classList.toggle('no-info'), close: () => ($('pv').hidden = true), retry: () => V.list[V.idx] && loadInfo(V.list[V.idx]) })[a]();
     else if (i != null) showAt(Number(i));
   };
   stage.addEventListener('wheel', e => { e.preventDefault(); pvZoom(-e.deltaY * 0.0015 * Math.max(1, PV.scale), e.clientX, e.clientY); }, { passive: false });

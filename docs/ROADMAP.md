@@ -3,6 +3,19 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-13): photos the AI didn't check are shown
+
+- A photo can end up without an AI result: its file couldn't be read from EZ or was refused, the AI left it out of
+  its answer, or it was added in EZ after the review. Before, the panel said nothing and the viewer showed "not
+  reviewed" only when that photo was opened.
+- `photoReview.summary.checked` (backend) lists the photos the AI has a result for. Panel Photos tab: "35 of 38 photos
+  were checked by the AI. Press Run AI review to check the other 3…" and a **Not checked N** filter. Viewer: the same
+  note, a **Not checked by AI** filter, and "The AI has not checked this photo yet…" in the notes column. Reviews made
+  before this show nothing new (they have no `checked`).
+- Viewer: a failed request for what the AI saw (network, sign-in) showed "This photo was not reviewed by the AI." It
+  now says "Couldn't load what the AI saw for this photo." with **Try again**, and the failure is not remembered.
+- Test: `backend/test/ai.mjs` (27). Checked in the harness with the fake AI and 3 of 38 photos left out, light + dark.
+
 ## Built (2026-11-11): reset a customer's photos used this month
 
 - Admins: Customers & licences → Edit → **Reset photos used to 0** (click twice). The month's count starts again from

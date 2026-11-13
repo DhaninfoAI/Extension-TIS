@@ -79,6 +79,8 @@ Implied by the client docs (the KB is literally a *QC* knowledge base):
 
 ## Decisions so far
 
+- 2026-11-13: photos the AI didn't check are named in the panel and viewer ("35 of 38 photos were checked by the AI",
+  Not checked filter); a failed load in the viewer says so with Try again instead of "not reviewed".
 - 2026-11-10: no final check in the panel. Save QC outcome records every finding's decision (applied / dismissed +
   reason / undone / not acted) for later analysis.
 - 2026-11-10: no backup (word-matching) check of the underwriter's instructions: only the AI checks them. Without the

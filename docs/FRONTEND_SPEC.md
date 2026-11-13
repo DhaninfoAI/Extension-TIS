@@ -117,8 +117,10 @@ Plus a separate **web admin** for TIS managers (rules, hazard library, analytics
 - **Full-size viewer window** (built 2026-11-01, `viewer/`): "View all N photos ↗" (Photos tab) and "Read the full
   narrative ↗" (Narrative tab) open one large popup window (1440×940, reused if already open; the panel re-points it
   with a `VIEWER_SHOW` message). **Photos**: every photo in one grid (filters Hazards / Rename / Rec photos / Marked by
-  inspector, caption search, S/M/L tiles); click → zoom/pan viewer with a filmstrip and a notes column (what the AI
-  sees, hazards + suggested rec, suggested name, the rec it is used for). "Show in EZ" and "Copy caption" were removed
+  inspector / Not checked by AI, caption search, S/M/L tiles); click → zoom/pan viewer with a filmstrip and a notes column (what the AI
+  sees, hazards + suggested rec, suggested name, the rec it is used for). Photos the AI has no result for (2026-11-13):
+  "N of M photos were checked by the AI…" note in the panel's Photos tab (with a **Not checked N** filter) and in the
+  viewer; a failed load of what the AI saw shows "Couldn't load what the AI saw for this photo." + **Try again**. "Show in EZ" and "Copy caption" were removed
   2026-11-10. **Narrative**: the full text in a reading column with the
   flagged sentences highlighted (click ↔ issue card), word count, Copy text ("Show in EZ" removed 2026-11-10); a **Current / Draft** switch when
   a draft exists (2026-11-06; `[[confirm: …]]` facts highlighted, Copy copies the draft). Read-only: the window never writes into EZ.

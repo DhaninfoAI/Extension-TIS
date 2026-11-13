@@ -642,21 +642,29 @@ function viewPhotos() {
     const drafted = pr.some(i => i.recDrafted && i.evidence?.photos?.includes(id));
     return `${all.some(i => i.kind === 'photo_source') ? '<span class="sv">Street View?</span>' : ''}${h.some(i => i.severity === 'blocker') ? '<span>Hazard</span>' : h.length || drafted ? '<span class="adv">Hazard</span>' : ''}${caps.some(i => i.evidence?.photos?.includes(id) && isOpen(i)) ? '<span class="ren">Rename</span>' : ''}${snapPhotos.find(p => p.imageId === id)?.usedAsRecImage ? '<span class="rec">Rec</span>' : ''}`;
   };
-  const f = S.photoFilter;
-  const ids = snapPhotos.map(p => p.imageId).filter(id => f === 'all' || (f === 'issues' ? pr.some(i => i.evidence?.photos?.includes(id) && (isOpen(i) || i.recDrafted)) : caps.some(i => i.evidence?.photos?.includes(id) && isOpen(i))));
   const pfx = s => s ? s.replace(/\s+/g, ' ') : '';
   // `engine` is hidden from customers, so it can't decide this; `summary.vision` can (older reviews: `cached` exists only after a vision pass)
   const prs = S.analysis.modules.photoReview?.summary || {};
   const sawImages = prs.vision ?? (prs.cached != null || S.analysis.modules.photoReview?.engine === 'openai');
-  const insightsNote = aiFailedFor('photoReview') ? "The AI couldn't look at the photos this time (see the note at the top), so they were checked by caption only."
-    : !sawImages ? 'Photos were checked by caption only for this order. Open it in EZ and run the review to include the images.' : '';
+  const aiDown = aiFailedFor('photoReview');
+  // photos the AI has no result for while the rest were looked at: file not uploaded, left out of the AI's answer, or
+  // added in EZ after this review. Reviews made before `checked` existed can't tell, so they show nothing.
+  const checked = sawImages && !aiDown && Array.isArray(prs.checked) ? new Set(prs.checked.map(String)) : null;
+  const unchecked = new Set(checked ? snapPhotos.map(p => String(p.imageId)).filter(id => !checked.has(id)) : []);
+  const f = S.photoFilter === 'unchecked' && !unchecked.size ? 'all' : S.photoFilter;
+  const ids = snapPhotos.map(p => p.imageId).filter(id => f === 'all' || (f === 'unchecked' ? unchecked.has(String(id))
+    : f === 'issues' ? pr.some(i => i.evidence?.photos?.includes(id) && (isOpen(i) || i.recDrafted)) : caps.some(i => i.evidence?.photos?.includes(id) && isOpen(i))));
+  const n = unchecked.size;
+  const insightsNote = aiDown ? "The AI couldn't look at the photos this time (see the note at the top), so they were checked by caption only."
+    : !sawImages ? 'Photos were checked by caption only for this order. Open it in EZ and run the review to include the images.'
+    : n ? `${snapPhotos.length - n} of ${snapPhotos.length} photos were checked by the AI. Press Run AI review to check the other ${n === 1 ? 'one' : n}; until then ${n === 1 ? 'it is' : 'they are'} checked by caption only.` : '';
   // same pattern as "Read the full narrative ↗" on the Narrative tab (also in the quick links as "Photo viewer")
   return `${snapPhotos.length ? `<div class="row open-viewer"><button class="primary sm" data-act="viewer" data-view="photos">View all ${snapPhotos.length} photos ↗</button><span class="small muted">Large window with every photo and its findings</span></div>` : ''}
-    <div class="filters" role="group" aria-label="Photo filter">${[['issues', 'Hazards'], ['rename', 'Rename'], ['all', `All ${snapPhotos.length}`]].map(([k, l]) => `<button data-act="pfilter" data-f="${k}" aria-pressed="${f === k}">${l}</button>`).join('')}</div>
+    <div class="filters" role="group" aria-label="Photo filter">${[['issues', 'Hazards'], ['rename', 'Rename'], ['all', `All ${snapPhotos.length}`], ...(n ? [['unchecked', `Not checked ${n}`]] : [])].map(([k, l]) => `<button data-act="pfilter" data-f="${k}" aria-pressed="${f === k}">${l}</button>`).join('')}</div>
     ${insightsNote ? `<p class="small muted">${esc(insightsNote)}</p>` : ''}
     ${!S.demo && S.origin && onImagesPage() ? '<p class="small muted">Click a photo to see it larger. Click a finding to find its photo on this page.</p>' : ''}
     ${ids.length ? `<div class="grid">${ids.map(id => { const p = snapPhotos.find(x => x.imageId === id);
-      return `<button class="tile" data-act="photo" data-photo="${esc(id)}" title="${esc(p?.caption)}"><img src="${photoUrl(id)}" alt="${esc(p?.caption)}" loading="lazy" onerror="this.remove()"><span class="flags">${flags(id)}</span><span class="cap">${esc(pfx(p?.caption))}</span></button>`; }).join('')}</div>` : `<div class="empty good">${f === 'issues' ? 'No hazards found in photos' : f === 'rename' ? 'No photo names to fix' : 'No photos'}</div>`}
+      return `<button class="tile" data-act="photo" data-photo="${esc(id)}" title="${esc(p?.caption)}"><img src="${photoUrl(id)}" alt="${esc(p?.caption)}" loading="lazy" onerror="this.remove()"><span class="flags">${flags(id)}</span><span class="cap">${esc(pfx(p?.caption))}</span></button>`; }).join('')}</div>` : `<div class="empty good">${f === 'issues' ? 'No hazards found in photos' : f === 'rename' ? 'No photo names to fix' : f === 'unchecked' ? 'Every photo was checked by the AI' : 'No photos'}</div>`}
     ${pr.some(i => i.kind === 'photo_source' && (isOpen(i) || S.itemState[i.id])) ? `<h3>Where the photos came from</h3>${list(pr.filter(i => i.kind === 'photo_source'), '')}` : ''}
     ${draftedBox(pr)}
     <h3>Hazards without a recommendation</h3>${list(pr.filter(i => i.kind !== 'photo_source'), pr.some(i => i.recDrafted) ? 'Every other hazard seen is covered by a recommendation' : 'Every hazard seen is covered by a recommendation')}
