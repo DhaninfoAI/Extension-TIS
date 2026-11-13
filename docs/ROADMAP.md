@@ -3,6 +3,17 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-13): duplicate-recommendation cards removed (1166310)
+
+- 1166310 offered "Duplicate recommendations" merging the electrician rec with the fire-extinguisher tag rec (Apply
+  would have cleared the extinguisher rec). The user asked to remove the duplicate logic altogether:
+  - AI: no "merge" action (schema, `prompts/recommendations.md`: "never combine two existing recommendations"),
+    and the code ignores any merge the model still returns.
+  - Rule `recs.duplicates` ("… look like the same recommendation") deleted from `rules.json` and `rules.mjs`, and
+    retired from the live store at start-up (`server.mjs`, like `general.no_answer_needs_comment`).
+  - Kept: `recSame`, so the AI still doesn't offer a new rec that an existing one already says.
+- Tests: `rec-checks.mjs` (6), `test:ai` (28: a merge from the fake is ignored).
+
 ## Built (2026-11-13): property-only order with the General Form (1166307)
 
 - "Form type does not match coverage… Order is Monoline Property but the full General Form (with GL sections) is

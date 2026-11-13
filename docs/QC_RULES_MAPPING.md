@@ -83,7 +83,7 @@ Client-name matching must be exact-then-fuzzy. EZ truncates long names in menus
 | Housekeeping | "Acceptable except X" in an answer → a rec for X must exist | 4.1 |
 | Emergency lighting rec | Only if ≥ 4 stories or > 12 units (NFPA) | 5.1 |
 | Panic hardware rec | Depends on occupancy/building characteristics, not on presence | 5.1 |
-| Duplicate recs | Hand-written + auto-generated rec saying the same thing → keep one | 5.1 |
+| ~~Duplicate recs~~ | Removed 2026-11-13 (user's decision): no duplicate / merge cards. A new AI rec that an existing one already says is still not offered | 5.1 |
 | Narrative | Never a source of truth. Must not contradict the form. Keep facts that have no form question | 5.2 |
 | Stale values | After a correction (e.g. SF), no old value may remain in comments/narrative | final-check |
 | Client sensitivity | Seneca: every sidewalk flaw is a rec. Others: advisory | 4.1 |

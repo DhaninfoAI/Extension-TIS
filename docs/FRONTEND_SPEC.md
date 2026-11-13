@@ -74,7 +74,7 @@ Plus a separate **web admin** for TIS managers (rules, hazard library, analytics
 ### 2.4 Recs (recommendations + photos)
 - One list in report order (`2026-001…`), sections:
   **Missing** (from flagged answers / photo hazards / marked photos) · **Needs rewrite**
-  (starts with "Recommend", no action, typo, no location) · **Duplicate** (merge) ·
+  (starts with "Recommend", no action, typo, no location) · ~~Duplicate (merge)~~ (removed 2026-11-13) ·
   **Not applicable** (e.g. emergency lighting on a 3-unit building, with the rule) ·
   **OK**.
 - Each rec card: text (editable before apply), Required/Advisory, source link,
