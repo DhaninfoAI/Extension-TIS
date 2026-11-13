@@ -3,6 +3,17 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-13): Yes/No changes must be backed by the photo result (1166312)
+
+- 1166312: blocker "21. Housekeeping satisfactory…? Yes → No: Photo 18441419 shows a dumpster area with accumulated
+  refuse". The photo review had seen "A dumpster area with a blue dumpster enclosed by a brick wall", no hazards; the
+  Yes/No step reads only those results (not the image) and added "accumulated refuse" itself.
+- `photoBacksClaim`: a photo-based "problem" is kept only when the question's subject words (`SUBJECTS`) appear in
+  what the photo review saw on the cited photos (description + hazards). Also drops, on the local test data:
+  1166305 extension cord as "clutter" (housekeeping), 1166310 graffiti as "not secured". Kept: Stab-Lok panels,
+  clutter in an electrical room, roof ponding. New subject: vacant-building window/door openings.
+- Tests: `qc-fixes.mjs` (33).
+
 ## Built (2026-11-13): "No prior report" on Overview
 
 - An order without an earlier survey ended Overview after Pricing with nothing, which looked like a missing step.

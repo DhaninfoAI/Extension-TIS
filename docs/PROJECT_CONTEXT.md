@@ -79,6 +79,8 @@ Implied by the client docs (the KB is literally a *QC* knowledge base):
 
 ## Decisions so far
 
+- 2026-11-13: a Yes/No change based on a photo needs the photo review's own result to show that problem; the
+  answers step may not read more into a photo than the photo review saw.
 - 2026-11-13: no duplicate-recommendation cards. SmartFill never merges or flags two existing recommendations as
   the same (AI merge and the `recs.duplicates` rule removed); it still doesn't add a new one that repeats an existing one.
 - 2026-11-13: the narrative draft's rules (TIS's question set + example narratives) are the standard. A card says
