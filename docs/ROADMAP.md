@@ -23,6 +23,20 @@
   clutter in an electrical room, roof ponding. New subject: vacant-building window/door openings.
 - Tests: `qc-fixes.mjs` (33).
 
+## Built (2026-11-13): orders with two narrative boxes, and quotes from another box (1169277)
+
+- 1169277 has two narrative boxes: General Form (empty) and Seneca General Form (2,832 characters). The review used
+  the filled one, but the viewer showed "The narrative is empty": it looked for a rewrite card (gone since
+  2026-11-05) and otherwise took the first box. Viewer `narrativeField` now uses the draft's box, else the first
+  narrative with text (as the server does); the panel's square footage helper reads the same box.
+- Its only narrative card, blocker "Narrative contradicts the form: sprinkler system", quoted "There is no sprinkler
+  system at this address." That sentence is in the Special Underwriter Concerns Response, not the narrative (which
+  says the building is sprinklered). `quoteIn`: a narrative card's quote must be in the narrative. Drops only this
+  card among the 37 stored narrative cards with a quote. Tests: `narrative-links.mjs` (25), `test:ai` (29; the fake
+  now quotes the narrative it is given).
+- Open: that U/W response sentence does contradict the form ("Yes, 100% sprinklered"), and the underwriter step
+  marked "Confirm there's a sprinkler system" as Answered.
+
 ## Built (2026-11-13): prior report with nothing to compare (1168085)
 
 - 1168085 and its prior 1165501 are both recommendation checks: no square footage, ISO class or sprinklers on

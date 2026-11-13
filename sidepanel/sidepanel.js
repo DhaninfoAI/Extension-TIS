@@ -433,7 +433,9 @@ function orderInfoBox() {
 
 // ---------------------------------------------------------------- square footage / Google Earth helper (QC checklist 1.4)
 function narrativeSqft() {
-  const f = (S.snapshot?.forms || []).flatMap(x => x.sections.flatMap(s => s.fields)).find(x => x.type === 'longtext' && /^narrative($| \()/i.test((x.label || '').trim()));
+  // the narrative box with text, as the server picks it (1169277 has an empty General Form one before the Seneca one)
+  const all = (S.snapshot?.forms || []).flatMap(x => x.sections.flatMap(s => s.fields)).filter(x => x.type === 'longtext' && /^narrative($| \()/i.test((x.label || '').trim()));
+  const f = all.find(x => String(x.value || '').trim()) || all[0];
   const m = String(f?.value || '').match(/(\d{1,3}(?:,\d{3})+|\d{3,7})\s*[- ]?\s*(?:square[- ]?f(?:oo|ee)t|sq\.?\s*f(?:oo|ee)?t\.?|sf\b)/i);
   return m ? num(m[1]) : null;
 }

@@ -172,10 +172,13 @@ function renderInfo(p, f, ins, failed = false) {
 
 // ---------------------------------------------------------------- narrative
 const fieldsOf = s => (s?.forms || []).flatMap(f => (f.sections || []).flatMap(sec => (sec.fields || []).map(x => ({ ...x, form: f.name }))));
+/** The narrative the review checked: the box its draft writes to, else (as the server picks it) the first narrative
+ *  box with text. 1169277 (2026-11-13) has two, General Form (empty) and Seneca General Form (2,832 characters), and
+ *  the viewer said "The narrative is empty" from the first one (it looked for a rewrite card, gone since 2026-11-05). */
 function narrativeField() {
-  const rw = itemsOf(['narrative']).find(i => i.kind === 'rewrite'), key = rw?.proposedWrites?.[0]?.key;
-  const fs = fieldsOf(V.snapshot);
-  return (key && fs.find(f => f.key === key)) || fs.find(f => f.type === 'longtext' && /^narrative($| \()/i.test((f.label || '').trim()));
+  const it = itemsOf(['narrative']).find(i => ['draft', 'rewrite'].includes(i.kind) && i.proposedWrites?.length), key = it?.proposedWrites?.[0]?.key;
+  const fs = fieldsOf(V.snapshot), all = fs.filter(f => f.type === 'longtext' && /^narrative($| \()/i.test((f.label || '').trim()));
+  return (key && fs.find(f => f.key === key)) || all.find(f => String(f.value || '').trim()) || all[0];
 }
 const narrativeIssues = () => itemsOf(['narrative']).filter(i => i.kind !== 'rewrite' && i.kind !== 'draft');   // old reviews may still carry a rewrite
 const narrativeDraft = () => itemsOf(['narrative']).find(i => i.kind === 'draft' && i.after);
