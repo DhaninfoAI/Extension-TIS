@@ -23,6 +23,14 @@
   clutter in an electrical room, roof ponding. New subject: vacant-building window/door openings.
 - Tests: `qc-fixes.mjs` (33).
 
+## Built (2026-11-13): documents on the Images page are not photos (1168098)
+
+- 1168098 showed 62 of 63 photos checked by the AI. Number 63 (18489512, "SOV-Promised Land Holdings_7-15-26") is
+  an Excel Statement of Values attached to the order, not a picture: EZ has no image file for it, so the download
+  failed and the AI never saw it. `snapshot.js` `images()` now leaves out items whose link opens a document (EZ's
+  attachment types). Checked on the live page: 63 caption boxes, 1 document, 62 photos. Takes effect on the next
+  read of an order (Run AI review); EZ facts in `PLATFORM_ANALYSIS.md` §6.1.
+
 ## Built (2026-11-13): orders with two narrative boxes, and quotes from another box (1169277)
 
 - 1169277 has two narrative boxes: General Form (empty) and Seneca General Form (2,832 characters). The review used

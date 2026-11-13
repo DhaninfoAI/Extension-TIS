@@ -184,7 +184,11 @@
   async function images(orderId) {
     const d = await fetchDoc({ method: 'POST', body: new URLSearchParams({ g: 'O', orderid: orderId, buttonact: 'Upload', butparam: '' }) });
     const f = d.forms.imgeditform; if (!f) return [];
-    return [...f.querySelectorAll('input[name^=caption]')].map((c, i) => {
+    // documents attached to the order share the page and its caption boxes but aren't pictures: their link opens the
+    // file, e.g. onclick="…('/orders/1/1/6/8/0/9/8/11680989483945.xlsx',18489512)" (1168098, 2026-11-13: a Statement
+    // of Values counted as photo 63, never downloadable, so "not checked by the AI"). Same file types as EZ's own list.
+    const docs = new Set([...d.documentElement.innerHTML.matchAll(/['"][^'"]+\.(?:docx?|docm|rtf|xlsx?|xlsm|pdf|accdb|zip|xml)['"]\s*,\s*(\d+)\s*\)/gi)].map(m => m[1]));
+    return [...f.querySelectorAll('input[name^=caption]')].filter(c => !docs.has(c.name.replace('caption', ''))).map((c, i) => {
       const id = c.name.replace('caption', '');
       const cell = d.querySelector(`[name="delbox${id}"]`)?.closest('td')?.textContent || '';
       const box = d.getElementById('img' + id)?.closest('table')?.textContent || '';

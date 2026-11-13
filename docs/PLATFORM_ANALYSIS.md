@@ -260,6 +260,12 @@ order into `sessionStorage` and runs the optional spell-check (`formsc`).
 Diagrams made with EZ's diagram tool (CREATE DIAGRAM) don't appear here
 (`imgorderD` was empty on 1166305 although the order shows Diagrams: 1).
 
+Documents attached to the order are on the same page with their own `caption<id>` box but no picture: an icon
+(`/images/exceldoc-icon.gif`) and a link that opens the file, `onclick="…('/orders/1/1/6/8/0/9/8/11680989483945.xlsx',
+18489512)"` (1168098, 2026-11-13: a client Statement of Values in `imgorderO`). There is no `<id>l.jpg` for them.
+EZ's own attachment types (`reatt`): .doc .docx .docm .rtf .xls .xlsx .xlsm .pdf .accdb .zip .xml. The snapshot
+leaves these out of `photos`.
+
 Boost AI samples: **0 photos hazard-marked** on all 6 orders. The "Used as Rec Image"
 markers matched the recommendation photos exactly (e.g. 3/3 on 1166305).
 
