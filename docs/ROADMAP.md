@@ -3,6 +3,13 @@
 > Last updated 2026-11-05 (v0.4.0). The single list of open work: click-saving ideas + the improvement list (§ at the end). When something here is built, move it to "Built"
 > and note it in `FRONTEND_SPEC.md` §2.8 / `ARCHITECTURE.md` §2a.
 
+## Built (2026-11-13): hand an account over to the customer
+
+`backend/scripts/hand-over.mjs` (run on the server with the service stopped, dry run unless `--apply`): new email for
+an account with the same password, organisation on a plan with the photo count reset, every session ended, and the
+organisation's review data deleted (snapshots, analyses, feedback, outcomes, batches, photo results, photo folders).
+Used to give the TIS demo account (`reviewer@tis.demo`) to TIS on the Starter plan. Steps: `backend/deploy/DEPLOY.md`.
+
 ## Built (2026-11-13): Yes/No cards that misquote another answer (1168084)
 
 - 1168084 (live order): blocker "3. Load-bearing substrate… Concrete block → N/A: Brick veneer is marked as 'No'",
