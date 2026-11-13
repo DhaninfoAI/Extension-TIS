@@ -23,6 +23,14 @@
   clutter in an electrical room, roof ponding. New subject: vacant-building window/door openings.
 - Tests: `qc-fixes.mjs` (33).
 
+## Built (2026-11-13): photo viewer browses the card's own photos
+
+- Clicking a card's photo (Checks, Recs, Answers, Photos findings…) opened the on-page viewer with all the order's
+  photos, so → went to the order's next photo, not the card's. `showPhoto(id, set)` now gets the card's evidence
+  photos (`data-set` on the thumbnails; "Show photo ›" uses the finding's photos), and the Photos tab sends its
+  current filter (Hazards / Rename / All / Not checked). Without a set, the whole order as before. Harness: the
+  1166312 Stab-Lok card sends its 3 photos at index 2 of 3; Photos tab Hazards 1, All 52.
+
 ## Built (2026-11-13): documents on the Images page are not photos (1168098)
 
 - 1168098 showed 62 of 63 photos checked by the AI. Number 63 (18489512, "SOV-Promised Land Holdings_7-15-26") is

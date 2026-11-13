@@ -508,7 +508,8 @@ function render() {
 // ---------------------------------------------------------------- item card
 function photoUrl(id) { return `${S.cfg.apiBase}/v1/orders/${S.orderId}/photos/${encodeURIComponent(id)}?token=${encodeURIComponent(S.cfg.bearer || '')}`; }
 function thumbs(ids) {
-  return ids?.length ? `<div class="thumbs">${ids.slice(0, 4).map(id => `<img class="thumb" src="${photoUrl(id)}" alt="Photo ${esc(id)}" data-act="photo" data-photo="${esc(id)}" onerror="this.outerHTML='<span class=&quot;thumb ph&quot;>${esc(id)}</span>'">`).join('')}</div>` : '';
+  // data-set: the card's own photos, so ← → in the photo viewer stays on them (not the whole order)
+  return ids?.length ? `<div class="thumbs" data-set="${esc(ids.join(','))}">${ids.slice(0, 4).map(id => `<img class="thumb" src="${photoUrl(id)}" alt="Photo ${esc(id)}" data-act="photo" data-photo="${esc(id)}" onerror="this.outerHTML='<span class=&quot;thumb ph&quot;>${esc(id)}</span>'">`).join('')}</div>` : '';
 }
 /** Drop EZ field keys ([F4_112427_1_10704437]) and photo ids from text shown to people or written into EZ. */
 const noCodes = t => String(t || '').replace(/\b(photos?|images?)\s+\d{6,}((\s*,\s*|\s+and\s+)\d{6,})*/gi, '$1')
@@ -674,7 +675,7 @@ function viewPhotos() {
     <div class="filters" role="group" aria-label="Photo filter">${[['issues', 'Hazards'], ['rename', 'Rename'], ['all', `All ${snapPhotos.length}`], ...(n ? [['unchecked', `Not checked ${n}`]] : [])].map(([k, l]) => `<button data-act="pfilter" data-f="${k}" aria-pressed="${f === k}">${l}</button>`).join('')}</div>
     ${insightsNote ? `<p class="small muted">${esc(insightsNote)}</p>` : ''}
     ${!S.demo && S.origin && onImagesPage() ? '<p class="small muted">Click a photo to see it larger. Click a finding to find its photo on this page.</p>' : ''}
-    ${ids.length ? `<div class="grid">${ids.map(id => { const p = snapPhotos.find(x => x.imageId === id);
+    ${ids.length ? `<div class="grid" data-set="${esc(ids.join(','))}">${ids.map(id => { const p = snapPhotos.find(x => x.imageId === id);
       return `<button class="tile" data-act="photo" data-photo="${esc(id)}" title="${esc(p?.caption)}"><img src="${photoUrl(id)}" alt="${esc(p?.caption)}" loading="lazy" onerror="this.remove()"><span class="flags">${flags(id)}</span><span class="cap">${esc(pfx(p?.caption))}</span></button>`; }).join('')}</div>` : `<div class="empty good">${f === 'issues' ? 'No hazards found in photos' : f === 'rename' ? 'No photo names to fix' : f === 'unchecked' ? 'Every photo was checked by the AI' : 'No photos'}</div>`}
     ${pr.some(i => i.kind === 'photo_source' && (isOpen(i) || S.itemState[i.id])) ? `<h3>Where the photos came from</h3>${list(pr.filter(i => i.kind === 'photo_source'), '')}` : ''}
     ${draftedBox(pr)}
@@ -688,7 +689,7 @@ function draftedBox(pr) {
   const d = pr.filter(i => i.recDrafted); if (!d.length) return '';
   const st = { applied: 'Applied in EZ', dismissed: 'Dismissed' };
   return `<h3>Hazards with a drafted recommendation</h3>${d.map(i => { const id = i.evidence?.photos?.[0], s = st[S.itemState[i.recItemId]?.status];
-    return `<div class="drafted">${id ? `<img class="thumb" src="${photoUrl(id)}" alt="Photo ${esc(id)}" data-act="photo" data-photo="${esc(id)}" onerror="this.outerHTML='<span class=&quot;thumb ph&quot;>${esc(id)}</span>'">` : ''}
+    return `<div class="drafted">${id ? `<img class="thumb" src="${photoUrl(id)}" alt="Photo ${esc(id)}" data-act="photo" data-photo="${esc(id)}" data-set="${esc(id)}" onerror="this.outerHTML='<span class=&quot;thumb ph&quot;>${esc(id)}</span>'">` : ''}
       <div><b>${esc(i.title)}</b><small>${esc(i.message || '')}</small></div>
       ${s ? `<span class="state">${s}</span>` : `<button class="link sm" data-act="gotab" data-tab="recs" data-item="${esc(i.recItemId || '')}">See in Recs ›</button>`}</div>`; }).join('')}`;
 }
@@ -836,7 +837,7 @@ async function onPanelClick(e) {
     if (!S.origin) return;
     await chrome.tabs.update(S.tab, { url: `${S.origin}${ezScript()}?g=3&orderid=${S.orderId}&formid=${b.dataset.form}&copyformnum=0` });
   } else if (act === 'photo') {
-    await photoClick(b.dataset.photo);
+    await photoClick(b.dataset.photo, (b.closest('[data-set]')?.dataset.set || '').split(',').filter(Boolean));
   } else if (act === 'openprior') {   // the prior survey's order page, in a new tab next to this one (read-only GET)
     if (!S.origin) return;
     const cur = await chrome.tabs.get(S.tab).catch(() => null);
@@ -938,7 +939,7 @@ async function locate(i, { view = false } = {}) {
       const r = await send(key ? { type: 'FOCUS', tabId: S.tab, key } : { type: 'FOCUS_PHOTO', tabId: S.tab, imageId: photo }).catch(() => null);
       if (r?.ok) return toast(key ? 'Here is the photo. Its caption box is ready to edit' : 'Here is the photo on the Images page');
     }
-    if (photo) return showPhoto(photo);
+    if (photo) return showPhoto(photo, i.evidence?.photos || []);
     return;
   }
   await jumpTo(key);
@@ -959,7 +960,7 @@ async function jumpTo(key) {
 }
 const onImagesPage = () => !S.demo && S.det?.page === 'images' && S.det.orderId === S.orderId;
 /** A photo (tile or thumbnail) was clicked in the panel: open the large viewer, on every page. */
-async function photoClick(id) { return showPhoto(id); }
+async function photoClick(id, set) { return showPhoto(id, set); }
 /** Open this order's Images page in a new tab next to the current one (or switch to it if it's already open). */
 async function openImages() {
   if (S.demo || !S.origin || !S.orderId) return toast('Open the order in EZ first');
@@ -988,8 +989,12 @@ async function openViewer(view, photo) {
   await chrome.windows.create({ url: `${base}?${p}`, type: 'popup', width, height, left: Math.max(0, Math.round((screen.availWidth - width) / 2)), top: Math.max(0, Math.round((screen.availHeight - height) / 2)) });
 }
 
-async function showPhoto(id) {
-  const photos = S.snapshot?.photos || [];
+/** set: the photos to browse with ← → (a card's own evidence, or the Photos tab's current filter); without one, the
+ *  whole order. Before 2026-11-13 a card's photo opened the order's full list, so "next" left the card's photos. */
+async function showPhoto(id, set = []) {
+  const all = S.snapshot?.photos || [];
+  const own = set.map(x => all.find(p => String(p.imageId) === String(x))).filter(Boolean);
+  const photos = own.some(p => String(p.imageId) === String(id)) ? own : all;
   const ids = photos.map(p => p.imageId);
   if (!S.demo && S.origin && S.det?.orderId === S.orderId && ids.length) {
     const r = await send({ type: 'SHOW_PHOTOS', tabId: S.tab, orderId: S.orderId, imageIds: ids, exts: photos.map(p => p.ext), captions: photos.map(p => p.caption), index: Math.max(0, ids.indexOf(id)) }).catch(() => null);

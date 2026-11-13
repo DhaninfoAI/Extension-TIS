@@ -189,7 +189,8 @@ Plus a separate **web admin** for TIS managers (rules, hazard library, analytics
 - **Section jump bar** (EZ forms, built 2026-11-01): "☰ Sections" tab on the left edge → list of the form's sections
   (omitted greyed, current bold, issue counts after Highlight); click scrolls there. Display only.
 - **Photo viewer** (on-page and in the panel), as in NSR: scroll to zoom (100–600%), drag to pan,
-  double-click to zoom/fit, + / − / 0 keys, ← → to browse, Esc to close.
+  double-click to zoom/fit, + / − / 0 keys, ← → to browse, Esc to close. ← → browse what was clicked from
+  (2026-11-13): a card's own photos, or the Photos tab's current filter; the whole order only without either.
 - **Page status strip** (under the header): icon + the page type ("General Form", "Images page", "Order page",
   "Report view · Read only") + a green "N to apply here" count. Since 2026-11-10 each fact is shown once: the page
   type only here, the order number only on the order card ("**Order 1166305**" bold, the address under it in smaller text),
